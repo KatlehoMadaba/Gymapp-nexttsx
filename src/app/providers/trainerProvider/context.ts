@@ -12,12 +12,14 @@ export interface ITrainer{
     policiesAccepted:boolean;
     message?:string;
 }
+
 export interface ITrainerStateContext{
     isPending:boolean;
     isSuccess:boolean;
     isError:boolean;
     Trainer?:ITrainer;
     Trainers?:ITrainer[];
+    readonly TrainerCreated?:ITrainer;
 }
  export interface ITrainerActionContext{
     getTrainers:()=>void;
