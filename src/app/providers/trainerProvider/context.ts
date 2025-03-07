@@ -10,7 +10,7 @@ export interface ITrainer{
     activeState:boolean;
     trial:boolean;
     policiesAccepted:boolean;
-
+    message?:string;
 }
 export interface ITrainerStateContext{
     isPending:boolean;

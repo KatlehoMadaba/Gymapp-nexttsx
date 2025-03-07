@@ -1,95 +1,114 @@
-import Image from "next/image";
+"use client"
+import React from "react";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form, Input,} from "antd";
 import styles from "./page.module.css";
+import { ITrainer } from './providers/trainerProvider/context';
 
-export default function Home() {
+const TrainerRegister = () => {
+  const onFinish = (values: ITrainer) => {
+    console.log("Received values of form: ", values);
+  };
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <Form
+          name="login"
+          initialValues={{ remember: true }}
+          style={{ maxWidth: 360 }}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            name="name"
+            rules={[{ required: true, message: "Please input your Username!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Name" />
+          </Form.Item>
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: "Please input your Username!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Email" />
+          </Form.Item>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: "Please input your Password!" }]}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Password"
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+          </Form.Item>
+
+          <Form.Item
+            name="confirmpassword"
+            rules={[{ required: true, message: "Please input your confirm password!" }]}
           >
-            Read our docs
-          </a>
-        </div>
+            <Input
+              prefix={<LockOutlined />}
+              type="confirmpassword"
+              placeholder="Confirm Password"
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="email"
+            rules={[{ required: true, message: "Please input your Username!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Email" />
+          </Form.Item>
+
+          <Form.Item
+            name="role"
+            rules={[{ required: true, message: "Please input your Userrole!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="role" />
+          </Form.Item>
+          <Form.Item
+            name="number"
+            rules={[{ required: true, message: "Please input your Usernumber!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="number" />
+          </Form.Item>
+          <Form.Item
+            name="planType"
+            rules={[{ required: true, message: "Please input your UserplanType!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="planType" />
+          </Form.Item>
+          
+          <Form.Item
+            name="activeState"
+            rules={[{ required: true, message: "Please input your UseractiveState!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="activeState" />
+          </Form.Item>
+
+          <Form.Item
+            name="trail"
+            rules={[{ required: true, message: "Please input your Usertrail!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="trail" />
+          </Form.Item>
+
+          <Form.Item
+            name="policiesAccpted"
+            rules={[{ required: true, message: "Please input your UserpoliciesAccpted!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="policiesAccpted" />
+          </Form.Item>
+          <Form.Item>
+            <Button block type="primary" htmlType="submit">
+              Sign Up
+            </Button>
+          </Form.Item>
+        </Form>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
-}
+};
+
+export default TrainerRegister;
