@@ -71,6 +71,8 @@ running application
 npm install
 npm install antd react-router-dom @reduxjs/toolkit react-redux typescript
 npm install redux-actions
+npm install --save-dev @types/axios
+
 
 Development
 npm run dev

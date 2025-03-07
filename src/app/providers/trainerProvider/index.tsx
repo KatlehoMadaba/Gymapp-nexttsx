@@ -1,4 +1,4 @@
-import { Trainereducer, useContext} from "react";
+import React,{ useReducer, useContext} from "react";
 import {
   TrainerStateContext,
   TrainerActionContext,
@@ -7,7 +7,7 @@ import {
 } from "./context";
 
 import { TrainerReducer } from "./reducer";
-import { getTrainerError, getTrainerPending, getTrainersError, getTrainersPending, getTrainersSuccess } from "./action";
+import { getTrainerError, getTrainerPending, getTrainersError, getTrainersPending, getTrainersSuccess,getTrainerSuccess ,createTrainerPending,createTrainerSuccess,createTrainerError} from "./action";
 import axios from "axios";
 
 
@@ -38,41 +38,53 @@ const UseTrainers = () => {
 export { UseTrainers };
 
 const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = Trainereducer(TrainerReducer, INITIAL_STATE);
 
-  const getTrainers = async () => {
-    dispatch(getTrainersPending());
-    const endpoint = `https://api.jsonbin.io/v3/b/67c8c259acd3cb34a8f5a0d0`;
-    await axios(endpoint)
-    .then((response) => {
-      //  // eslint-disable-next-line no-debugger
-      //  debugger;
-        const record=response.data["record"];
-        dispatch(getTrainersSuccess(record));
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch(getTrainersError());
-      });
-  };
+    const [state, dispatch] = useReducer(TrainerReducer, INITIAL_STATE);
 
-  const getTrainer = async (id: string) => {
-  };
+    const getTrainers = async () => {
+        dispatch(getTrainersPending());
+        const endpoint = ``;
+        try {
+            const response=await axios.get(endpoint)
+            const record =response.data["data"];
+            dispatch(getTrainersSuccess(record));
+    
+        } catch(error){
+                console.error(error);
+                dispatch(getTrainersError());
+            };
+    }
+    const getTrainer = async (id: string) => {
+    };
+    
+    const createTrainer = async (Trainer: ITrainer) => {
+        dispatch(createTrainerPending());
+        const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
+        try {
+            const reponse=await axios.post(endpoint,Trainer)
+            const record=reponse.data["data"]
+            dispatch(getTrainerSuccess(record))
+        } catch (error) {
+            console.error('Error creating users:',error);
+          dispatch(createTrainerError());   
+        }
+    };
+    const deleteTrainer = async (id: string) => {};
+    const updateTrainer = async (Trainer: ITrainer) => {};
 
-  const createTrainer = async (Trainer: ITrainer) => {};
-  const deleteTrainer = async (id: string) => {};
-  const updateTrainer = async (Trainer: ITrainer) => {};
+    return (
+        <div>
+          <TrainerStateContext.Provider value={state}>
+            <TrainerActionContext.Provider
+              value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}
+            >
+              {children}
+            </TrainerActionContext.Provider>
+          </TrainerStateContext.Provider>
+        </div>
+      );
 
-  return (
-    <div>
-      <TrainerStateContext.Provider value={state}>
-        <TrainerActionContext.Provider
-          value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}
-        >
-          {children}
-        </TrainerActionContext.Provider>
-      </TrainerStateContext.Provider>
-    </div>
-  );
-};
+}
 export default TrainerProvider;
+
+
