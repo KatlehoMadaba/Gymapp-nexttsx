@@ -1,9 +1,10 @@
+"use client"
 import { createContext } from "react";
 export interface ITrainer{
     name:string;
     email:string;
     password:string;
-    confirmpassword:string;
+    confirmpassword?:string;
     role:string;
     contactNumber:string;
     planType:string;

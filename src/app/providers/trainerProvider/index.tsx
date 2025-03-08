@@ -1,3 +1,4 @@
+"use client"
 import React,{ useReducer, useContext} from "react";
 import {
   TrainerStateContext,
@@ -8,7 +9,7 @@ import {
 
 import { TrainerReducer } from "./reducer";
 import { getTrainerError, getTrainerPending, getTrainersError, getTrainersPending, getTrainersSuccess,getTrainerSuccess ,createTrainerPending,createTrainerSuccess,createTrainerError} from "./action";
-import axios from "axios";
+import axios,{AxiosError} from "axios";
 
 
  const useTrainerState = () => {
@@ -61,12 +62,23 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch(createTrainerPending());
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
         try {
-            const reponse=await axios.post(endpoint,Trainer)
-            const record=reponse.data["data"]
-            dispatch(getTrainerSuccess(record))
+            console.log('SEending Trainer data',Trainer);
+            const response=await axios.post(endpoint,Trainer);
+            console.log('Response',response.data)
+            const record=response.data["data"]
+            dispatch(getTrainerSuccess(record));
         } catch (error) {
-            console.error('Error creating users:',error);
-          dispatch(createTrainerError());   
+            if(error instanceof AxiosError){
+                if(error.response?.data?.message){
+
+                    console.error('API ERROR:',error.response.data.message)
+                }
+            }
+            else{
+                console.error('Error creating users:',error);
+
+            }
+            dispatch(createTrainerError());   
         }
     };
     const deleteTrainer = async (id: string) => {};
