@@ -50,7 +50,6 @@
 
 .main code {
   font-family: inherit;
-  background: var(--gray-alpha-100);
   padding: 2px 4px;
   border-radius: 4px;
   font-weight: 600;
@@ -82,8 +81,7 @@
 }
 
 a.primary {
-  background: var(--foreground);
-  color: var(--background);
+
   gap: 8px;
 }
 
@@ -161,8 +159,3 @@ a.secondary {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-}
