@@ -6,10 +6,17 @@ import {
   INITIAL_STATE,
   ITrainer,
 } from "./context";
-
 import { TrainerReducer } from "./reducer";
-import { getTrainerError, getTrainerPending, getTrainersError, getTrainersPending, getTrainersSuccess,getTrainerSuccess ,createTrainerPending,createTrainerSuccess,createTrainerError} from "./action";
-import axios,{AxiosError} from "axios";
+import { getTrainerError, 
+    getTrainerPending, 
+    getTrainersError, 
+    getTrainersPending, 
+    getTrainersSuccess,
+    getTrainerSuccess ,
+    createTrainerPending,
+    createTrainerSuccess,
+    createTrainerError} from "./action";
+//import axios,{AxiosError} from "axios";
 
 
  const useTrainerState = () => {
@@ -68,12 +75,10 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
             const record=response.data["data"]
             dispatch(getTrainerSuccess(record));
         } catch (error) {
-            if(error instanceof AxiosError){
                 if(error.response?.data?.message){
 
                     console.error('API ERROR:',error.response.data.message)
                 }
-            }
             else{
                 console.error('Error creating users:',error);
 
