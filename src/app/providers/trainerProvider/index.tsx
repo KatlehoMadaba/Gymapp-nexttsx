@@ -7,15 +7,22 @@ import {
   ITrainer,
 } from "./context";
 import { TrainerReducer } from "./reducer";
-import { getTrainerError, 
-    getTrainerPending, 
-    getTrainersError, 
-    getTrainersPending, 
-    getTrainersSuccess,
-    getTrainerSuccess ,
-    createTrainerPending,
-    createTrainerSuccess,
-    createTrainerError} from "./action";
+import { 
+  getTrainersError, 
+  getTrainersPending, 
+  getTrainersSuccess,
+  getTrainerSuccess ,
+  createTrainerPending,
+  createTrainerError} from "./action";
+// import { getTrainerError, 
+//     getTrainerPending, 
+//     getTrainersError, 
+//     getTrainersPending, 
+//     getTrainersSuccess,
+//     getTrainerSuccess ,
+//     createTrainerPending,
+//     createTrainerSuccess,
+//     createTrainerError} from "./action";
 //import axios,{AxiosError} from "axios";
 
 
@@ -63,6 +70,7 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
             };
     }
     const getTrainer = async (id: string) => {
+      return id;
     };
     
     const createTrainer = async (Trainer: ITrainer) => {
@@ -86,14 +94,19 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
             dispatch(createTrainerError());   
         }
     };
-    const deleteTrainer = async (id: string) => {};
-    const updateTrainer = async (Trainer: ITrainer) => {};
+    const deleteTrainer = async (id: string) => {
+      return id
+    };
+    const updateTrainer = async (Trainer: ITrainer) => {
+      return Trainer
+    };
 
     return (
         <div>
           <TrainerStateContext.Provider value={state}>
             <TrainerActionContext.Provider
               value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}
+             
             >
               {children}
             </TrainerActionContext.Provider>
