@@ -14,6 +14,10 @@ export enum TrainerActionEnums {
     createTrainerSuccess = "CREATE_Trainer_SUCCESS",
     createTrainerError = "CREATE_Trainer_ERROR",
 
+    loginTrainerPending = "LOGIN_Trainer_PENDING",
+    loginTrainerSuccess = "LOGIN_Trainer_SUCCESS",
+    loginTrainerError = "LOGIN_Trainer_ERROR",
+
     updateTrainerPending = "UPDATE_Trainer_PENDING",
     updateTrainerSuccess = "UPDATE_Trainer_SUCCESS",
     updateTrainerError = "UPDATE_Trainer_ERROR",
@@ -21,6 +25,8 @@ export enum TrainerActionEnums {
     deleteTrainerPending = "DELETE_Trainer_PENDING",
     deleteTrainerSuccess = "DELETE_Trainer_SUCCESS",
     deleteTrainerError = "DELETE_Trainer_ERROR",
+
+    
 };
 
 export const getTrainersPending = createAction<ITrainerStateContext>(
@@ -82,9 +88,42 @@ export const createTrainerSuccess = createAction<
         })
     )
 
-export const createTrainerError = createAction<ITrainerStateContext>(
+export const createTrainerError = createAction<
+ITrainerStateContext>(
     TrainerActionEnums.createTrainerError,
-    () => ({ isPending: false, isSuccess: false, isError: true })
+    () => ({ 
+        isPending: false, 
+        isSuccess: false, 
+        isError: true })
+)
+
+export const loginTrainerPending = createAction<
+ITrainerStateContext>(
+    TrainerActionEnums.createTrainerPending,
+    () => ({ 
+        isPending: true, 
+        isSuccess: false, 
+        isError: false })
+)
+
+export const loginTrainerSuccess = createAction<
+    ITrainerStateContext, ITrainer>(
+        TrainerActionEnums.createTrainerSuccess,
+        (Trainer: ITrainer) => ({
+            isPending: false,
+            isSuccess: true,
+            isError: false,
+            Trainer
+        })
+    )
+
+export const loginTrainerError = createAction<
+ITrainerStateContext>(
+    TrainerActionEnums.createTrainerError,
+    () => ({ 
+        isPending: false, 
+        isSuccess: false, 
+        isError: true })
 )
 
 export const deleteTrainerPending = createAction<

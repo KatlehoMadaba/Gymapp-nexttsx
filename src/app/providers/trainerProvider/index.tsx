@@ -5,36 +5,20 @@ import {
   TrainerActionContext,
   INITIAL_STATE,
   ITrainer,
+  ITrainerLogin,
+  ILoginResponse,
+  ICurrentUserResponse,
 } from "./context";
 import { TrainerReducer } from "./reducer";
 import { 
-  getTrainersError, 
-  getTrainersPending, 
-  getTrainersSuccess,
-  getTrainerSuccess ,
   createTrainerPending,
-  createTrainerError} from "./action";
-// import { getTrainerError, 
-//     getTrainerPending, 
-//     getTrainersError, 
-//     getTrainersPending, 
-//     getTrainersSuccess,
-//     getTrainerSuccess ,
-//     createTrainerPending,
-//     createTrainerSuccess,
-//     createTrainerError} from "./action";
+  createTrainerError,
+  createTrainerSuccess,
+  loginTrainerPending,
+  loginTrainerError,
+  loginTrainerSuccess
+} from "./action";
 import axios from "axios";
-
- /*
-  true & true = true
-  false & true = false
-  false & false = true
-
-  not true = false
-
-
-
- */
 
 
  const useTrainerState = () => {
@@ -67,50 +51,68 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [state, dispatch] = useReducer(TrainerReducer, INITIAL_STATE);
 
-    const getTrainers = async () => {
-        dispatch(getTrainersPending());
-        const endpoint = ``;
-        try {
-            const response=await axios.get(endpoint)
-            const record =response.data["data"];
-            dispatch(getTrainersSuccess(record));
-    
-        } catch(error){
-                console.error(error);
-                dispatch(getTrainersError());
-            };
-    }
-    const getTrainer = async (id: string) => {
-      return id;
-    };
-    
     const createTrainer = async (Trainer: ITrainer) => {
         dispatch(createTrainerPending());
-        //const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
 
         try {
             console.log('Sending Trainer data',Trainer);
             const response=await axios.post(endpoint,Trainer);
             console.log('Response',response.data);
-            //const record=response.data["data"]
-            dispatch(getTrainerSuccess(response.data));
+            dispatch(createTrainerSuccess(response.data));
         } catch (error) {
             console.error("Error during signup:",error.response?.data.message ||error)
             dispatch(createTrainerError());   
         }
     };
-    const deleteTrainer = async (id: string) => {
-      return id
-    };
-    const updateTrainer = async (Trainer: ITrainer) => {
-      return Trainer
-    };
+
+    const loginTrainer = async (Trainer: ITrainerLogin) => {
+      dispatch(loginTrainerPending());
+      const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
+      try {
+          console.log('login in your user',Trainer);
+
+          const response=await axios.post<ILoginResponse>(endpoint,Trainer);
+
+          console.log('Response for logining in your user',response.data);
+
+          const token=response.data.data.token;
+
+          if(token){
+            sessionStorage.setItem("jwtToken",token);
+          }
+          dispatch(loginTrainerSuccess(response.data));
+      } catch (error) {
+          console.error("Error during signup:",error.response?.data.message ||error)
+          dispatch(loginTrainerError());   
+      }
+  };
+
+  const getTrainer=async ():Promise<ICurrentUserResponse | null> => {
+      const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/current";
+      const token=sessionStorage.getItem("jwtToken");
+      if(!token){
+        console.error("There is no token found,User is not authenticated")
+        return null;
+      }
+      try {
+        const response=await axios.get<ICurrentUserResponse>(endpoint,{
+          headers:{
+            Authorization:`Bearer${token}`,
+          },
+        });
+        console.log("Current User Data:",response.data);
+        return response.data;
+      } catch (error) {
+        console.error("Errorfetching the current user:",error.response?.data?.message || error);
+        return null;
+      }
+  };
 
     return (
           <TrainerStateContext.Provider value={state}>
             <TrainerActionContext.Provider
-              value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}>
+              value={{getTrainer, createTrainer,loginTrainer }}>
               {children}
             </TrainerActionContext.Provider>
           </TrainerStateContext.Provider>

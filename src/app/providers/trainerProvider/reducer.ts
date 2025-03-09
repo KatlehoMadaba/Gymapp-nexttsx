@@ -39,6 +39,18 @@ export const TrainerReducer=handleActions<ITrainerStateContext,ITrainerStateCont
         ...state,
         ...action.payload,
     }),
+    [TrainerActionEnums.loginTrainerPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [TrainerActionEnums.loginTrainerSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [TrainerActionEnums.loginTrainerError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
     [TrainerActionEnums.updateTrainerPending]:(state,action)=>({
         ...state,
         ...action.payload,

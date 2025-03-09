@@ -14,6 +14,32 @@ export interface ITrainer{
     message?:string;
 }
 
+export interface ITrainerLogin{
+    email:string;
+    password:string;
+}
+export interface ILoginResponse{
+    status:number,
+    message:string,
+    data:{
+        token:string
+    }
+}
+export interface ICurrentUserResponse{
+    status:number;
+    message:string;
+    data:{
+        id: string;
+        name: string;
+        email: string;
+        role: string;
+        contactNumber: string;
+        activeState: boolean;
+        planType: string;
+        trial: boolean;
+        date: string;
+    };
+}
 export interface ITrainerStateContext{
     isPending:boolean;
     isSuccess:boolean;
@@ -22,12 +48,11 @@ export interface ITrainerStateContext{
     Trainers?:ITrainer[];
     readonly TrainerCreated?:ITrainer;
 }
+
  export interface ITrainerActionContext{
-    getTrainers:()=>void;
-    getTrainer:(id:string)=>void;
+    getTrainer:()=>Promise<ICurrentUserResponse|null>;
     createTrainer:(Trainer:ITrainer)=>void;
-    updateTrainer:(Trainer:ITrainer)=>void;
-    deleteTrainer:(id:string)=>void;
+    loginTrainer:(Trainer:ITrainerLogin)=>void;
  }
 
  export const INITIAL_STATE:ITrainerStateContext={
