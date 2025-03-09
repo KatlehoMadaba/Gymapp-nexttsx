@@ -7,7 +7,7 @@ import { ITrainer } from '../../providers/trainerProvider/context';
 import { UseTrainers} from "../../providers/trainerProvider/index"
 const TrainerRegister = () => {
   //const { createTrainer,Trainers, isPending, isError,getTrainers, deleteTrainer, updateTrainer,TrainerCreated } = UseTrainers();
-  const { createTrainer ,isError,isPending, TrainerCreated } = UseTrainers();
+  const { createTrainer ,isError,isPending, TrainerCreated} = UseTrainers();
 
   // useEffect(() => {
   //   getTrainers();
@@ -25,13 +25,15 @@ const TrainerRegister = () => {
 
   // Show error state
   if (isError) {
-    return <div>Error loading trainers!</div>;
+    return <div>Sorry I couldnt sign you update</div>;
+  }else{
+    console.log("well done you have signed up ")
   }
   const onFinish = (values: ITrainer) => {
     console.log("Received values of form: ", values);
-    if(createTrainer){
-      createTrainer(values)
-    }
+      createTrainer(values) 
+      
+
   };
 
   return (
