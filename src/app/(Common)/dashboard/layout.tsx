@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Layout, Menu, Button, theme } from "antd";
-import ClientCard from "../../components/Card";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,

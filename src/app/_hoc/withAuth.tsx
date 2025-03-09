@@ -38,7 +38,7 @@ const WithAuth = <P extends object>(
 
       setIsAuthorized(true);
       setIsLoading(false);
-    }, [router]);
+    }, [router,pathname]);
 
     if (isLoading) {
       return <p>Loading...</p>;

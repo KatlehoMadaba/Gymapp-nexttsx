@@ -31,7 +31,7 @@ import axios from "axios";
   false & false = true
 
   not true = false
-  
+
 
 
  */
@@ -93,7 +93,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
             console.log('Sending Trainer data',Trainer);
             const response=await axios.post(endpoint,Trainer);
             console.log('Response',response.data);
-
             //const record=response.data["data"]
             dispatch(getTrainerSuccess(response.data));
         } catch (error) {
@@ -109,16 +108,12 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <div>
           <TrainerStateContext.Provider value={state}>
             <TrainerActionContext.Provider
-              value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}
-             
-            >
+              value={{ getTrainers, getTrainer, createTrainer, updateTrainer, deleteTrainer }}>
               {children}
             </TrainerActionContext.Provider>
           </TrainerStateContext.Provider>
-        </div>
       );
 
 }
