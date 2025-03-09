@@ -45,13 +45,13 @@ const TrainerRegister = () => {
         >
           <Form.Item
             name="name"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Name" />
           </Form.Item>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Email" />
           </Form.Item>
@@ -66,63 +66,71 @@ const TrainerRegister = () => {
               placeholder="Password"
             />
           </Form.Item>
-
-          {/* <Form.Item
-            name="confirmpassword"
-            rules={[{ required: true, message: "Please input your confirm password!" }]}
+          <Form.Item
+            name="confirmPassword"
+            dependencies={['password']}
+            rules={[{ required: true, message: "Please input your Password!" },
+            ({getFieldValue})=>({
+              validator(_,value){
+                if(!value || getFieldValue('password')===value){
+                  return Promise.resolve();
+                }
+                return Promise.reject("You passwords are not matching!")
+              }
+            })
+            ]}
           >
             <Input
               prefix={<LockOutlined />}
-              type="confirmpassword"
-              placeholder="Confirm Password"
+              type="password"
+              placeholder="confirmPassword"
             />
-          </Form.Item> */}
-
+          </Form.Item>
           <Form.Item
             name="role"
-            rules={[{ required: true, message: "Please input your Userrole!" }]}
+            rules={[{ required: true, message: "Please input your role!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="role" />
           </Form.Item>
           <Form.Item
             name="contactNumber"
-            rules={[{ required: true, message: "Please input your Usernumber!" }]}
+            rules={[{ required: true, message: "Please input your contact number!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="number" />
           </Form.Item>
           <Form.Item
             name="activeState"  
             valuePropName="checked"
-            rules={[{ required: true, message: "Please input your UseractiveState!" }]}
+            rules={[{ required: true, message: "Please input your activeState!" }]}
           >
-            <Switch checkedChildren="Active" unCheckedChildren="Inactive" />
+            <Switch checkedChildren="true" unCheckedChildren="false" />
             
             {/* <Input prefix={<UserOutlined />} placeholder="activeState" /> */}
           </Form.Item>
 
           <Form.Item
             name="planType"
-            rules={[{ required: true, message: "Please input your UserplanType!" }]}
+            rules={[{ required: true, message: "Please input your planType!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="planType" />
           </Form.Item>
       
           <Form.Item
-            name="trail"
+            name="trial"
             valuePropName="checked"
-            rules={[{ required: true, message: "Please input your Usertrail!" }]}
+            rules={[{ required: true, message: "Please input your trial!" }]}
           >
             {/* <Input prefix={<UserOutlined />} placeholder="trail" /> */}
-          <Switch checkedChildren="Accepted" unCheckedChildren="Not Accepted" />
+          <Switch checkedChildren="true" unCheckedChildren="false" />
           </Form.Item>
 
           <Form.Item
             name="policiesAccepted"
             valuePropName="checked"
-            rules={[{ required: true, message: "Please input your UserpoliciesAccpted!" }]}
+            rules={[{ required: true, message: "Policies not accpeted you cant move own with out accepting!" }]}
           >
             {/* <Input prefix={<UserOutlined />} placeholder="policiesAccpted" /> */}
-          <Switch checkedChildren="Accepted" unCheckedChildren="Not Accepted" />
+          <Switch checkedChildren="true" unCheckedChildren="false" />
 
           </Form.Item>
           <Form.Item>
