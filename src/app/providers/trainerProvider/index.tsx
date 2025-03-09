@@ -75,22 +75,20 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
     
     const createTrainer = async (Trainer: ITrainer) => {
         dispatch(createTrainerPending());
+        //const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
+
         try {
             console.log('SEending Trainer data',Trainer);
-            const response=await axios.post(endpoint,Trainer);
-            console.log('Response',response.data)
-            const record=response.data["data"]
-            dispatch(getTrainerSuccess(record));
+            const response=await axios.post(endpoint,Trainer,{
+              withCredentials:true,//http cookies are allowed to be sent
+            });
+            console.log('Response',response.data);
+
+            //const record=response.data["data"]
+            dispatch(getTrainerSuccess(response.data));
         } catch (error) {
-                if(error.response?.data?.message){
-
-                    console.error('API ERROR:',error.response.data.message)
-                }
-            else{
-                console.error('Error creating users:',error);
-
-            }
+            console.error("Error during signup:",error.response?.data.message ||error)
             dispatch(createTrainerError());   
         }
     };
