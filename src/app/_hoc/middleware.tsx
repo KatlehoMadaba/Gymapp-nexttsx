@@ -5,7 +5,7 @@ export function middleware(req:NextRequest){
     if(!token){
         return NextResponse.redirect(new URL("login",req.url));
     }
-    return NextRequest.next();//access is allowed if token exists
+    return NextResponse.next();//access is allowed if token exists
 }
     export const config={
         matcher:["/dashboard","/profile"],//protected routes

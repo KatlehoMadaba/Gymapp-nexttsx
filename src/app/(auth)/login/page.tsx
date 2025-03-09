@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import axios,{AxiosError} from "axios";
+//import axios,{AxiosError} from "axios";
 import { useRouter } from "next/navigation";
 import styles from "../../page.module.css"
 
@@ -23,7 +23,7 @@ const Login = () => {
       console.log("Login successful:", response.data);
       router.push("/dashboard"); // Redirect to dashboard after login
     } catch (err) {
-        if((err as AxiosError).isAxiosError){
+        if(err){
             setError(err.response?.data?.message || "Login failed");
         }else{
             setError("Ann error occured");
