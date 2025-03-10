@@ -37,6 +37,7 @@ export { UseUsers};
 
 const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE);
+  
   const getCurrentUser = async () => {
     const token = sessionStorage.getItem("jwtToken");
     dispatch(getCurrentUserPending());
