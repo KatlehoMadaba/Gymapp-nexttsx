@@ -28,7 +28,7 @@ export interface ICurrentStateContext{
 // }
 
 export interface ICurrentUserActionContext{
-    //getCurrentUser:()=>Promise<ICurrentUser|null>;
+    //getCurrentUser:()=>Promise<ICurrentUser|null>;    
     getCurrentUser:()=>void;
 
 }

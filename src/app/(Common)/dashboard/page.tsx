@@ -9,17 +9,26 @@ const Dashboard = () => {
   let token=""
   if(loginTrainer){
     token=sessionStorage.getItem("jwtToken")
-    
+
   }
-  // useEffect(() => {
-  //   getCurrentUser()
-    
-  // }, [token]);
- 
   useEffect(() => {
-    getCurrentUser()
-    
-  }, [token]);
+    let isMounted = true;
+    const fetchData=async () =>{
+      try{
+        if(isMounted){
+          await getCurrentUser()
+        } 
+      }catch(error){
+        if(isMounted){
+          console.log(error)
+        }
+      }
+    } 
+    fetchData()
+      return()=>{
+        isMounted = false;
+      }
+  }, [token,getCurrentUser]);
  
   if(isPending){
     return<div>Loading current user data...</div>
@@ -28,6 +37,7 @@ const Dashboard = () => {
     return <div>Sorry something went wrong with loading your data</div>
   }
   // Show empty state
+
   if (!currentuser) {
     return <div>No user found!</div>;
   }
