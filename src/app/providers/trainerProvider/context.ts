@@ -25,21 +25,7 @@ export interface ILoginResponse{
         token:string
     }
 }
-export interface ICurrentUserResponse{
-    status:number;
-    message:string;
-    data:{
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-        contactNumber: string;
-        activeState: boolean;
-        planType: string;
-        trial: boolean;
-        date: string;
-    };
-}
+
 export interface ITrainerStateContext{
     isPending:boolean;
     isSuccess:boolean;
@@ -50,7 +36,6 @@ export interface ITrainerStateContext{
 }
 
  export interface ITrainerActionContext{
-    getTrainer:()=>Promise<ICurrentUserResponse|null>;
     createTrainer:(Trainer:ITrainer)=>void;
     loginTrainer:(Trainer:ITrainerLogin)=>void;
  }

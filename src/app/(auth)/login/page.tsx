@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import styles from "../../page.module.css"
 import {UseTrainers} from "../../providers/trainerProvider/index"
 import { ITrainerLogin } from "@/app/providers/trainerProvider/context";
+import {UseUsers} from "../../providers/currentuserProvider/index"
 const Login = () => {
+  const {getCurrentUser}=UseUsers();
   const { loginTrainer ,isError,isPending} = UseTrainers();
   const router = useRouter();
 
@@ -22,6 +24,7 @@ const Login = () => {
   const onFinish = async (values:ITrainerLogin) => {
     console.log("Login data:",values);
     loginTrainer(values)
+    getCurrentUser();
     router.push("/dashboard");//go to dashbord after success
   };
 

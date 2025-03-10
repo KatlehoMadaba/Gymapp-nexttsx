@@ -7,7 +7,6 @@ import {
   ITrainer,
   ITrainerLogin,
   ILoginResponse,
-  ICurrentUserResponse,
 } from "./context";
 import { TrainerReducer } from "./reducer";
 import { 
@@ -66,53 +65,55 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    const loginTrainer = async (Trainer: ITrainerLogin) => {
-      dispatch(loginTrainerPending());
-      const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
-      try {
-          console.log('login in your user',Trainer);
+  //   const loginTrainer = async (Trainer: ITrainerLogin) => {
+  //     dispatch(loginTrainerPending());
+  //     const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
+  //     try {
+  //         console.log('login in your user',Trainer);
 
-          const response=await axios.post<ILoginResponse>(endpoint,Trainer);
+  //         const response=await axios.post<ILoginResponse>(endpoint,Trainer);
 
-          console.log('Response for logining in your user',response.data);
+  //         console.log('Response for logining in your user',response.data);
 
-          const token=response.data.data.token;
+  //         const token=response.data.data.token;
 
-          if(token){
-            sessionStorage.setItem("jwtToken",token);
-          }
-          dispatch(loginTrainerSuccess(response.data));
-      } catch (error) {
-          console.error("Error during signup:",error.response?.data.message ||error)
-          dispatch(loginTrainerError());   
+  //         if(token){
+  //           sessionStorage.setItem("jwtToken",token);
+  //         }
+  //         dispatch(loginTrainerSuccess(response.data));
+  //     } catch (error) {
+  //         console.error("Error during signup:",error.response?.data.message ||error)
+  //         dispatch(loginTrainerError());   
+  //     }
+  // };
+
+  const loginTrainer = async (Trainer: ITrainerLogin) => {
+    dispatch(loginTrainerPending());
+    const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
+    try {
+      console.log('Logging in user with:', Trainer);
+      const response = await axios.post<ILoginResponse>(endpoint, Trainer);
+
+      console.log('Login response:', response.data);
+      
+      const token = response.data.data.token; 
+      if (token) {
+        sessionStorage.setItem("jwtToken", token);
+      } else {
+        console.error("No token received in response");
       }
+      dispatch(loginTrainerSuccess(response.data));
+    } catch (error) {
+      console.error("Error during login:", error.response?.data?.message || error);
+      dispatch(loginTrainerError());
+    }
   };
 
-  const getTrainer=async ():Promise<ICurrentUserResponse | null> => {
-      const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/current";
-      const token=sessionStorage.getItem("jwtToken");
-      if(!token){
-        console.error("There is no token found,User is not authenticated")
-        return null;
-      }
-      try {
-        const response=await axios.get<ICurrentUserResponse>(endpoint,{
-          headers:{
-            Authorization:`Bearer${token}`,
-          },
-        });
-        console.log("Current User Data:",response.data);
-        return response.data;
-      } catch (error) {
-        console.error("Errorfetching the current user:",error.response?.data?.message || error);
-        return null;
-      }
-  };
 
     return (
           <TrainerStateContext.Provider value={state}>
             <TrainerActionContext.Provider
-              value={{getTrainer, createTrainer,loginTrainer }}>
+              value={{createTrainer,loginTrainer }}>
               {children}
             </TrainerActionContext.Provider>
           </TrainerStateContext.Provider>
