@@ -1,36 +1,41 @@
-name: Next.js CI
-
+name: CI/CD Pipeline
+ 
 on:
   push:
     branches:
-      - main  # Trigger when code is pushed to the `main` branch
+      - development
+      - main
   pull_request:
     branches:
-      - main  # Trigger when a PR is created targeting the `main` branch
-
+      - development
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+ 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
+    runs-on: ubuntu-latest
+ 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'  
-
-      # Step 3: Install dependencies (you can use npm or yarn)
+          node-version: 18
+          cache: "npm"
+ 
       - name: Install dependencies
-        run: npm install  
-
-      # Step 4: Build the Next.js app (this ensures the project compiles successfully)
-      - name: Build Next.js project
-        run: npm run build  
-
-      # # Step 5: Run tests (if you have tests)
-      # - name: Run tests
-      #   run: npm test  
+        run: npm install
+ 
+      - name: Build project
+        run: npm run build
+ 
+      - name: Run linting
+        run: npm run lint
+ 
+      - name: Run tests
+        run: npm test
+ 
