@@ -37,11 +37,10 @@ export { UseUsers};
 
 const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE);
-
-  const getCurrentUser = async (): Promise<ICurrentUser | null> => {
-    dispatch(getCurrentUserPending());
-    const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/current";
+  const getCurrentUser = async () => {
     const token = sessionStorage.getItem("jwtToken");
+    dispatch(getCurrentUserPending());
+    const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/user/current";
     console.log(token,"iS THE VALUE FROM SESSION STORAGE")
     if (!token) {
       console.error("There is no token found, User is not authenticated");

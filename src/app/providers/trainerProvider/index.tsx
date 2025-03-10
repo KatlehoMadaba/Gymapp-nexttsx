@@ -64,27 +64,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-  //   const loginTrainer = async (Trainer: ITrainerLogin) => {
-  //     dispatch(loginTrainerPending());
-  //     const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
-  //     try {
-  //         console.log('login in your user',Trainer);
-
-  //         const response=await axios.post<ILoginResponse>(endpoint,Trainer);
-
-  //         console.log('Response for logining in your user',response.data);
-
-  //         const token=response.data.data.token;
-
-  //         if(token){
-  //           sessionStorage.setItem("jwtToken",token);
-  //         }
-  //         dispatch(loginTrainerSuccess(response.data));
-  //     } catch (error) {
-  //         console.error("Error during signup:",error.response?.data.message ||error)
-  //         dispatch(loginTrainerError());   
-  //     }
-  // };
 
   const loginTrainer = async (Trainer: ITrainerLogin) => {
     dispatch(loginTrainerPending());
@@ -94,9 +73,10 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await axios.post<ILoginResponse>(endpoint, Trainer);
 
       console.log('Login response:', response.data);
-      
+
       const token = response.data.data.token; 
       if (token) {
+        console.log("this where we set the session")
         sessionStorage.setItem("jwtToken", token);
       } else {
         console.error("No token received in response");
