@@ -21,14 +21,9 @@ export interface ICurrentStateContext{
     isError:boolean
     currentuser?:ICurrentUser;
 };
-// export interface ICurrentStateContext{
-//     isEmptyToken:boolean,
-//     isPopulatedToken:boolean,
-//     currentuser?:ICurrentUser;
-// }
 
-export interface ICurrentUserActionContext{
-    //getCurrentUser:()=>Promise<ICurrentUser|null>;    
+
+export interface ICurrentUserActionContext{    
     getCurrentUser:()=>void;
 
 }

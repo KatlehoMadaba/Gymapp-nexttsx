@@ -51,12 +51,14 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
 
     const createTrainer = async (Trainer: ITrainer) => {
         dispatch(createTrainerPending());
+        //change 
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
         try {
             console.log('Sending Trainer data',Trainer);
             const response=await axios.post(endpoint,Trainer);
             console.log('Response',response.data);
             dispatch(createTrainerSuccess(response.data));
+            //route you to login page
         } catch (error) {
             console.error("Error during signup:",error.response?.data.message ||error)
             dispatch(createTrainerError());   
@@ -68,8 +70,8 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       console.log('Logging in user with:', Trainer);
       const response = await axios.post<ILoginResponse>(endpoint, Trainer);
-
       console.log('Login response:', response.data);
+      //destucture at some point please 
       const token = response.data.data.token; 
       if (token) {
         console.log("this where we set the session")

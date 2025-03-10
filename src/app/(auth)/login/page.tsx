@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect}from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/navigation";
@@ -8,24 +8,26 @@ import {UseTrainers} from "../../providers/trainerProvider/index"
 import { ITrainerLogin } from "@/app/providers/trainerProvider/context";
 import {UseUsers} from "../../providers/currentuserProvider/index"
 const Login = () => {
-  const {getCurrentUser}=UseUsers();
-  const { loginTrainer ,isError,isPending} = UseTrainers();
+  const {isError,isPending}=UseUsers();
+  const { loginTrainer,isSuccess} = UseTrainers();
   const router = useRouter();
-
+  useEffect(()=>{
+    if(isSuccess){
+      alert("you are now logged in")
+       router.push("/dashboard");//go to dashbord after success//if router is a stack it means it can store "things" which means that it can trigger a redener
+      }
+  },[router,isSuccess])
   if (isPending) {
     return <div>Trying to login you in...</div>;
   }
   if(isError){
     return<div>I am sorry I couldnt log you in</div>
-  }else{
-    console.log("I was able to log you in coolies")
   }
-
+ 
+ 
   const onFinish = async (values:ITrainerLogin) => {
     console.log("Login data:",values);
     loginTrainer(values)
-    getCurrentUser();
-    router.push("/dashboard");//go to dashbord after success
   };
 
   return (

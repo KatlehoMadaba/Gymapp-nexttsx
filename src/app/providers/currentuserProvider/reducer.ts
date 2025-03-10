@@ -1,5 +1,5 @@
 import {handleActions} from "redux-actions"
-import { CurrentUserEnums } from "./action";
+import { CurrentUserEnums} from "./action";
 import { INITIAL_STATE, ICurrentStateContext} from './context';
 
 
