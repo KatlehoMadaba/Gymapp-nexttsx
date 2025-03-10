@@ -18,9 +18,9 @@ const Dashboard = () => {
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      {/* <h1>Welcome, {currentuser.data.name}</h1>
+      <h1>Welcome, {currentuser.data.name}</h1>
       <p>Your email is: {currentuser.data.email}</p>
-      <p>Your user ID is: {currentuser.data.id}</p> */}
+      <p>Your user ID is: {currentuser.data.id}</p>
     </div>
 
   );
