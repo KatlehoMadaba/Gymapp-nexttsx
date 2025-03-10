@@ -4,11 +4,15 @@ import { INITIAL_STATE, ICurrentStateContext} from './context';
 
 
 export const CurrentUserReducer=handleActions<ICurrentStateContext,ICurrentStateContext>({
-    [ CurrentUserEnums.currentUserTokenEmpty]:(state,action)=>({
+    [ CurrentUserEnums.getCurentUserPending]:(state,action)=>({
         ...state,
         ...action.payload,
     }),
-    [ CurrentUserEnums.currentUserTokenPopulated]:(state,action)=>({
+    [ CurrentUserEnums.getCurentUserError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ CurrentUserEnums.getCurentUserSuccess]:(state,action)=>({
         ...state,
         ...action.payload,
     }),
