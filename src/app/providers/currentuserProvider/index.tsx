@@ -41,6 +41,7 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
     console.log(token,"iS THE VALUE FROM SESSION STORAGE")
     if (!token) {
       console.error("There is no token found, User is not authenticated");
+      
       return null;
     }
 

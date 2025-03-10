@@ -16,10 +16,16 @@ export interface ICurrentUser{
     currentuser?:ICurrentUser
 }
 export interface ICurrentStateContext{
-    isEmptyToken:boolean,
-    isPopulatedToken:boolean,
+    isPending:boolean,
+    isSuccess:boolean,
+    isError:boolean
     currentuser?:ICurrentUser;
-}
+};
+// export interface ICurrentStateContext{
+//     isEmptyToken:boolean,
+//     isPopulatedToken:boolean,
+//     currentuser?:ICurrentUser;
+// }
 
 export interface ICurrentUserActionContext{
     //getCurrentUser:()=>Promise<ICurrentUser|null>;
@@ -28,8 +34,9 @@ export interface ICurrentUserActionContext{
 }
 
 export const INITIAL_STATE:ICurrentStateContext={
-    isEmptyToken:true,
-    isPopulatedToken:false,
+    isPending:false,
+    isSuccess:false,
+    isError:false,
 }
  export const CurrentUserStateContext=
     createContext<ICurrentStateContext>(INITIAL_STATE);
