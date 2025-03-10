@@ -50,29 +50,5 @@ export const TrainerReducer=handleActions<ITrainerStateContext,ITrainerStateCont
     [TrainerActionEnums.loginTrainerError]:(state,action)=>({
         ...state,
         ...action.payload,
-    }),
-    [TrainerActionEnums.updateTrainerPending]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
-    [TrainerActionEnums.updateTrainerSuccess]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
-    [TrainerActionEnums.updateTrainerError]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
-    [TrainerActionEnums.deleteTrainerPending]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
-    [TrainerActionEnums.deleteTrainerSuccess]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
-    [TrainerActionEnums.deleteTrainerError]:(state,action)=>({
-        ...state,
-        ...action.payload,
-    }),
+    })
 },INITIAL_STATE)

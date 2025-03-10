@@ -47,7 +47,6 @@ const UseTrainers = () => {
 export { UseTrainers };
 
 const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
-
     const [state, dispatch] = useReducer(TrainerReducer, INITIAL_STATE);
 
     const createTrainer = async (Trainer: ITrainer) => {
@@ -63,8 +62,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
             dispatch(createTrainerError());   
         }
     };
-
-
   const loginTrainer = async (Trainer: ITrainerLogin) => {
     dispatch(loginTrainerPending());
     const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
@@ -73,7 +70,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await axios.post<ILoginResponse>(endpoint, Trainer);
 
       console.log('Login response:', response.data);
-
       const token = response.data.data.token; 
       if (token) {
         console.log("this where we set the session")
@@ -87,8 +83,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(loginTrainerError());
     }
   };
-
-
     return (
           <TrainerStateContext.Provider value={state}>
             <TrainerActionContext.Provider

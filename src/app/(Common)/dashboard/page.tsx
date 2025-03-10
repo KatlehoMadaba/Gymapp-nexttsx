@@ -1,27 +1,25 @@
 "use client";
-// import React, { useEffect } from "react";
 import React ,{useEffect}from "react";
 import { UseUsers} from "../../providers/currentuserProvider/index";
 import{UseTrainers } from "../../providers/trainerProvider/index"
 
 const Dashboard = () => {
-
   const {getCurrentUser,currentuser,isError,isPending}=UseUsers();
   const {loginTrainer} =UseTrainers()
   let token=""
   if(loginTrainer){
     token=sessionStorage.getItem("jwtToken")
+    
   }
+  // useEffect(() => {
+  //   getCurrentUser()
+    
+  // }, [token]);
+ 
   useEffect(() => {
     getCurrentUser()
     
   }, [token]);
- 
-  // debugger
-  // Check if user data has loaded (adjust property names as per your ICurrentUser interface)
-  // if (!currentuser?.data.email) {
-  //   return <div>Loading user information...</div>;
-  // }
  
   if(isPending){
     return<div>Loading current user data...</div>

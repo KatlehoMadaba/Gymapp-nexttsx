@@ -40,12 +40,12 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
   const getCurrentUser = async () => {
     const token = sessionStorage.getItem("jwtToken");
     dispatch(getCurrentUserPending());
-    const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/user/current";
     console.log(token,"iS THE VALUE FROM SESSION STORAGE")
     if (!token) {
       console.error("There is no token found, User is not authenticated");
       return null;
     }
+    const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/user/current";
     const authHeader = token.startsWith("Bearer") ? token : `Bearer ${token}`;
     console.log(authHeader)
     try {
@@ -76,7 +76,7 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
 export default CurrentProvider;
 
 
-// import React, { useReducer, useContext } from "react";
+
 // import { ICurrentUser, INITIAL_STATE } from './context';
 // import { CurrentUserActionContext, CurrentUserStateContext } from "./context";
 // import { CurrentUserReducer } from "./reducer";
