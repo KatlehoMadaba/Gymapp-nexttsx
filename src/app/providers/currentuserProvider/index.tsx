@@ -3,7 +3,11 @@ import React, { useReducer, useContext } from "react";
 import { ICurrentUser, INITIAL_STATE } from "./context";
 import { CurrentUserActionContext, CurrentUserStateContext } from "./context";
 import { CurrentUserReducer } from "./reducer";
-import { currentUserTokenEmpty, currentUserTokenPopulated } from "./action";
+import { 
+  getCurrentUserPending,
+  getCurrentUserError,
+  getCurrentUserSuccess} 
+  from "./action";
 import axios from "axios";
 
 const useCurrentState = () => {
@@ -35,17 +39,14 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE);
 
   const getCurrentUser = async (): Promise<ICurrentUser | null> => {
-    dispatch(currentUserTokenEmpty());
+    dispatch(getCurrentUserPending());
     const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/current";
     const token = sessionStorage.getItem("jwtToken");
     console.log(token,"iS THE VALUE FROM SESSION STORAGE")
     if (!token) {
       console.error("There is no token found, User is not authenticated");
-      
       return null;
     }
-
-    // Option 2: Use the token as-is if it already includes "Bearer"
     const authHeader = token.startsWith("Bearer") ? token : `Bearer ${token}`;
     console.log(authHeader)
     try {
@@ -54,11 +55,12 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
           Authorization: authHeader,
         },
       });
-      dispatch(currentUserTokenPopulated());
+      dispatch(getCurrentUserSuccess(response.data))
       console.log("Current User Data:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching the current user:", error.response?.data?.message || error);
+      dispatch(getCurrentUserError());
       return null;
     }
   };
@@ -74,7 +76,7 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default CurrentProvider;
 
-// "use client"
+
 // import React, { useReducer, useContext } from "react";
 // import { ICurrentUser, INITIAL_STATE } from './context';
 // import { CurrentUserActionContext, CurrentUserStateContext } from "./context";
