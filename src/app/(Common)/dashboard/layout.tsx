@@ -8,18 +8,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../../page.module.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -34,8 +23,6 @@ export default function DashboardLayout({
   } = theme.useToken();
 
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Layout style={{ minHeight: "100vh" }}>
           {/* Sidebar */}
           <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -61,19 +48,18 @@ export default function DashboardLayout({
                   label: 'Create general meals',
                 },
                 {
-                  key: '3',
+                  key: '4',
                   icon: <UploadOutlined />,
                   label: 'Profile',
                 },
                 {
-                  key: '3',
+                  key: '5',
                   icon: <UploadOutlined />,
-                  label: 'Settings',
+                  label: '',
                 },
               ]}
             />
           </Sider>
-
           <Layout>
             {/* Header */}
             <Header
@@ -122,7 +108,5 @@ export default function DashboardLayout({
             </Footer>
           </Layout>
         </Layout>
-      </body>
-    </html>
   );
 }

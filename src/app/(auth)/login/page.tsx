@@ -1,41 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from "../../page.module.css"
-
+import {UseTrainers} from "../../providers/trainerProvider/index"
+import { ITrainerLogin } from "@/app/providers/trainerProvider/context";
+import {UseUsers} from "../../providers/currentuserProvider/index"
 const Login = () => {
+  const {getCurrentUser}=UseUsers();
+  const { loginTrainer ,isError,isPending} = UseTrainers();
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
 
-  const onFinish = async (values: { email: string; password: string }) => {
-    try {
-      const response = await axios.post(
-        "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login",
-        values,
-        {
-          withCredentials: true, // Store token in an HTTP-only cookie
-        }
-      );
+  if (isPending) {
+    return <div>Trying to login you in...</div>;
+  }
+  if(isError){
+    return<div>I am sorry I couldnt log you in</div>
+  }else{
+    console.log("I was able to log you in coolies")
+  }
 
-      console.log("Login successful:", response.data);
-      router.push("/dashboard"); // Redirect to dashboard after login
-    } catch (err) {
-        if(err){
-            setError(err.response?.data?.message || "Login failed");
-        }else{
-            setError("Ann error occured");
-        }
-    }
+  const onFinish = async (values:ITrainerLogin) => {
+    console.log("Login data:",values);
+    loginTrainer(values)
+    getCurrentUser();
+    router.push("/dashboard");//go to dashbord after success
   };
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <h1>Login</h1>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
         <Form name="login" style={{ maxWidth: 360 }} onFinish={onFinish}>
           <Form.Item
             name="email"

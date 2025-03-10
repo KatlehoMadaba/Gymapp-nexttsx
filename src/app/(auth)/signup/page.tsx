@@ -1,23 +1,24 @@
 "use client"
-import React,{useEffect}from "react";
+// import React,{useEffect}from "react";
+import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input,Switch} from "antd";
 import styles from "../../page.module.css";
 import { ITrainer } from '../../providers/trainerProvider/context';
 import { UseTrainers} from "../../providers/trainerProvider/index"
 const TrainerRegister = () => {
-  //const { createTrainer,Trainers, isPending, isError,getTrainers, deleteTrainer, updateTrainer,TrainerCreated } = UseTrainers();
-  const { createTrainer ,isError,isPending, TrainerCreated} = UseTrainers();
+// const { createTrainer ,isError,isPending, TrainerCreated} = UseTrainers();
+const { createTrainer ,isError,isPending} = UseTrainers();
 
   // useEffect(() => {
   //   getTrainers();
   // }, []);
 
-  useEffect(()=>{
-    if(TrainerCreated!=null){
-      console.log(TrainerCreated,"from sign up page");
-    }
-  },[TrainerCreated])
+  // useEffect(()=>{
+  //   if(TrainerCreated!=null){
+  //     console.log(TrainerCreated,"from sign up page");
+  //   }
+  // },[TrainerCreated])
 
   if (isPending) {
     return <div>Loading trainers...</div>;
@@ -32,8 +33,6 @@ const TrainerRegister = () => {
   const onFinish = (values: ITrainer) => {
     console.log("Received values of form: ", values);
       createTrainer(values) 
-      
-
   };
 
   return (
