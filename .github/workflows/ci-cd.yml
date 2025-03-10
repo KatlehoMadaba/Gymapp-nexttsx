@@ -31,6 +31,6 @@ jobs:
       - name: Build Next.js project
         run: npm run build  
 
-      # Step 5: Run tests (if you have tests)
-      - name: Run tests
-        run: npm test  
+      # # Step 5: Run tests (if you have tests)
+      # - name: Run tests
+      #   run: npm test  

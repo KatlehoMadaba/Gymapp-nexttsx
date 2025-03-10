@@ -53,7 +53,6 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
     const createTrainer = async (Trainer: ITrainer) => {
         dispatch(createTrainerPending());
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/register";
-
         try {
             console.log('Sending Trainer data',Trainer);
             const response=await axios.post(endpoint,Trainer);

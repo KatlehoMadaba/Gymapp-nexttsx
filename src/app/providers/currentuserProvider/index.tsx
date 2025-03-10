@@ -53,7 +53,7 @@ const CurrentProvider = ({ children }: { children: React.ReactNode }) => {
           Authorization: authHeader,
         },
       });
-      dispatch(currentUserTokenPopulated(response.data));
+      dispatch(currentUserTokenPopulated());
       console.log("Current User Data:", response.data);
       return response.data;
     } catch (error) {
