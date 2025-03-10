@@ -31,7 +31,7 @@ const Login = () => {
   const onFinish = async (values:ITrainerLogin) => {
     console.log("Login data:",values);
     loginTrainer(values)
-    getCurrentUser();
+    // getCurrentUser();
   };
 
   return (
