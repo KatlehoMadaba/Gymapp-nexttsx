@@ -8,7 +8,7 @@ import {UseTrainers} from "../../providers/trainerProvider/index"
 import { ITrainerLogin } from "@/app/providers/trainerProvider/context";
 import {UseUsers} from "../../providers/currentuserProvider/index"
 const Login = () => {
-  const {getCurrentUser,isError,isPending}=UseUsers();
+  const {isError,isPending}=UseUsers();
   const { loginTrainer,isSuccess} = UseTrainers();
   const router = useRouter();
   useEffect(()=>{
@@ -23,15 +23,11 @@ const Login = () => {
   if(isError){
     return<div>I am sorry I couldnt log you in</div>
   }
-  // }else{
-  //   console.log("I was able to log you in coolies")
-  //   return <div>Hello world</div>
-  // }
+ 
  
   const onFinish = async (values:ITrainerLogin) => {
     console.log("Login data:",values);
     loginTrainer(values)
-    // getCurrentUser();
   };
 
   return (
