@@ -6,7 +6,11 @@ const { Sider } = Layout;
 const MySider = () => {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
-
+  const handleclearsession=()=>{
+    sessionStorage.clear()
+    router.push("/")
+  }
+  
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className="demo-logo-vertical" />
@@ -31,16 +35,6 @@ const MySider = () => {
           Add clients
         </Button>
 
-        {/* Other Buttons */}
-        <Button
-          type="default"
-          icon={<UploadOutlined />}
-          style={{ width: '100%', marginBottom: '10px' }}
-          onClick={() => { /* Handle Create general meals */ }}
-        >
-          Create general meals
-        </Button>
-
         <Button
           type="default"
           icon={<UploadOutlined />}
@@ -48,6 +42,16 @@ const MySider = () => {
           onClick={() => { /* Handle Profile */ }}
         >
           Profile
+        </Button>
+
+         {/* Other Buttons */}
+         <Button
+          type="default"
+          icon={<UploadOutlined />}
+          style={{ width: '100%', marginBottom: '10px' }}
+          onClick={() => {handleclearsession()}}
+        >
+          Logout
         </Button>
       </div>
     </Sider>

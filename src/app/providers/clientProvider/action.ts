@@ -43,12 +43,20 @@ export const getClientsSuccess = createAction<
 
 export const getClientsError = createAction<IClientStateContext>(
     ClientActionEnums.getClientsError,
-    () => ({ isPending: false, isSuccess: false, isError: true })
+    () => ({ 
+        isPending: false, 
+        isSuccess: false, 
+        isError: true 
+    })
 );
 
 export const getClientPending = createAction<IClientStateContext>(
     ClientActionEnums.getClientsPending,
-    () => ({ isPending: true, isSuccess: false, isError: false })
+    () => ({ 
+        isPending: true, 
+        isSuccess: false, 
+        isError: false 
+    })
 );
 
 export const getClientSuccess = createAction<

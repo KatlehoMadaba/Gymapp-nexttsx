@@ -14,6 +14,40 @@ export interface IClient{
     message?:string;
     dateOfBirth:string;
 }
+export interface IExistingClientsResponse{
+    data:[
+    {
+        invoice: {
+                invoice: {
+                    date: "2025-03-07T08:06:51.580Z"
+                },
+                invoiceHistory: []
+            },
+            preferences: {
+                mediaStorage: true,
+                existingInjuries: [],
+                hereditaryConditions: [],
+                workoutDays: [],
+                gymEquipment: [],
+                foodAllergies: []
+            },
+        _id: string,
+        hasOnboarded: false,
+        trainer: string,
+        uniqueTrainerCode: string,
+        contactNumber: string,
+        fullName:string,
+        nickname: string,
+        dateOfBirth: string,
+        email: string,
+        sex: string,
+        activeState: string,
+        date: string,
+        __v: 0,
+        user: string 
+    }
+    ]  
+}
 
 export interface IClientLogin{
     email:string;
@@ -52,7 +86,7 @@ export interface IClientStateContext{
     isSuccess:boolean;
     isError:boolean;
     Client?:IClient;
-    Clients?:IClient[];
+    Clients?:IExistingClientsResponse[];
     readonly ClientCreated?:IClient;
 }
 
@@ -60,6 +94,7 @@ export interface IClientStateContext{
     createClient:(Client:IClient)=>void;
     loginClient:(Client:IClientLogin)=>void;
     registerationClient:(Client:IClient)=>void;
+    getClients:()=>void;
  }
 
  export const INITIAL_STATE:IClientStateContext={

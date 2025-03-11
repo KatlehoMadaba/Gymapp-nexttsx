@@ -20,9 +20,13 @@ import {
   registrationClientPending,
   registrationClientSuccess,
   registrationClientError,
-
+  getClientsPending,
+  getClientsSuccess,
+  getClientsError
 } from "./action";
+import { UseUsers} from "../currentuserProvider/index";
 import axios from "axios";
+
 
 
  const useClientState = () => {
@@ -52,6 +56,7 @@ const UseClients = () => {
 export { UseClients };
 
 const ClientProvider = ({ children }: { children: React.ReactNode }) => {
+    const {currentuser} =UseUsers();
     const [state, dispatch] = useReducer(ClientReducer, INITIAL_STATE);
 
     const createClient = async (Client: IClient) => {
@@ -115,10 +120,40 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(loginClientError());
     }
   };
+  const getClients = async () => {
+    const token=sessionStorage.getItem("jwtToken");
+    console.log("this is the token getClients:",token)
+    // const trainerid=currentuser.data.id
+    //console.log("This trainerid",trainerid);
+    console.log("current user data",currentuser.data);
+    dispatch(getClientsPending());
+    console.log("this is the token getClients:",token)
+    if(!token){
+      console.error("Your user doesnt have exsting token getClients")
+      return
+    }
+      //const endpoint = `https://body-vault-server-b9ede5286d4c.herokuapp.com/api/client/trainer/${trainerid}/clients`;
+       const authHeader=token.startsWith("Bearer") ? token : `Bearer ${token}`;
+       console.log("token from create client:",authHeader)
+      const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/client/trainer/67cf0c43e2436c0019ae85b7/clients"
+      try {
+          console.log('Getting the clients data Client data');
+          const response=await axios.get(endpoint,{
+            headers:{
+              Authorization: authHeader,
+            },
+          });
+          dispatch(getClientsSuccess(response.data));
+          console.log("Geting the clients was a success",response.data)
+      } catch (error) {
+          console.error("Error fetching clients:", error);
+          dispatch(getClientsError());
+      }
+};
     return (
           <ClientStateContext.Provider value={state}>
             <ClientActionContext.Provider
-              value={{createClient,loginClient,registerationClient}}>
+              value={{getClients,createClient,loginClient,registerationClient}}>
               {children}
             </ClientActionContext.Provider>
           </ClientStateContext.Provider>
