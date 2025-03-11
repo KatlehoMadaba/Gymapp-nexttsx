@@ -11,15 +11,18 @@ const Login = () => {
   const {isError,isPending}=UseUsers();
   const { loginTrainer,isSuccess} = UseTrainers();
   const router = useRouter();
+
   useEffect(()=>{
     if(isSuccess){
-      alert("you are now logged in")
+      // alert("Logging you in")
        router.push("/dashboard");//go to dashbord after success//if router is a stack it means it can store "things" which means that it can trigger a redener
       }
   },[router,isSuccess])
+  
   if (isPending) {
     return <div>Trying to login you in...</div>;
   }
+  
   if(isError){
     return<div>I am sorry I couldnt log you in</div>
   }

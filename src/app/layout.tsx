@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TrainerProvider from "./providers/trainerProvider";
 import CurrentProvider from "./providers/currentuserProvider";
+import ClientProvider from "./providers/clientProvider";
 // import { ConfigProvider } from "antd";
 
 const geistSans = Geist({
@@ -29,9 +30,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TrainerProvider>
-        <CurrentProvider>
-        {children}
-        </CurrentProvider>
+          <CurrentProvider>
+            <ClientProvider>{children}</ClientProvider>
+          </CurrentProvider>
         </TrainerProvider>
       </body>
     </html>

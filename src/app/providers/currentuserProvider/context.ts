@@ -6,12 +6,15 @@ export interface ICurrentUser{
         id: string;
         name: string;
         email: string;
+        password?:string;
         role: string;
         contactNumber: string;
+        dateOfBirth?:string;
         activeState: boolean;
         planType: string;
         trial: boolean;
-        date: string;
+        policiesAccepted?:boolean
+        date?:string;
     };
     currentuser?:ICurrentUser
 }

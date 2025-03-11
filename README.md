@@ -78,6 +78,7 @@ npm install --save-dev @types/jsonwebtoken
 npm install jsonwebtoken axios
 npm install ant@latest
 npm install react@latest react-dom@latest
+npm install moment
 
 ## Development
 npm run dev

@@ -6,19 +6,12 @@ import { Button, Form, Input,Switch} from "antd";
 import styles from "../../page.module.css";
 import { ITrainer } from '../../providers/trainerProvider/context';
 import { UseTrainers} from "../../providers/trainerProvider/index"
+import { useRouter } from "next/navigation";
 const TrainerRegister = () => {
-// const { createTrainer ,isError,isPending, TrainerCreated} = UseTrainers();
-const { createTrainer ,isError,isPending} = UseTrainers();
-
-  // useEffect(() => {
-  //   getTrainers();
-  // }, []);
-
-  // useEffect(()=>{
-  //   if(TrainerCreated!=null){
-  //     console.log(TrainerCreated,"from sign up page");
-  //   }
-  // },[TrainerCreated])
+  //const router = useRouter();
+  
+  const { createTrainer ,isError,isPending} = UseTrainers();
+  
 
   if (isPending) {
     return <div>Loading trainers...</div>;
@@ -33,6 +26,7 @@ const { createTrainer ,isError,isPending} = UseTrainers();
   const onFinish = (values: ITrainer) => {
     console.log("Received values of form: ", values);
       createTrainer(values) 
+      //router.push("/login");
   };
 
   return (
