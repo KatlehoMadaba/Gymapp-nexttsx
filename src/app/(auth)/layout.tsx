@@ -1,10 +1,6 @@
 "use client";
 import { Layout, theme } from "antd";
-
 import "../page.module.css";
-
-
-
 const { Content, Footer } = Layout;
 
 export default function authLayout({

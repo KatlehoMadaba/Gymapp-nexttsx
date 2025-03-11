@@ -1,16 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Layout, Menu, Button, theme } from "antd";
+import { Layout, Button, theme } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import "../../page.module.css";
-
-const { Header, Sider, Content, Footer } = Layout;
+import MySider from "../../components/navbarAdmin"
+const { Header, Content, Footer } = Layout;
 
 export default function DashboardLayout({
   children,
@@ -25,41 +22,7 @@ export default function DashboardLayout({
   return (
         <Layout style={{ minHeight: "100vh" }}>
           {/* Sidebar */}
-          <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="demo-logo-vertical" />
-            <Menu
-              theme="dark"
-              mode="inline"
-              defaultSelectedKeys={['1']}
-              items={[
-                {
-                  key: '1',
-                  icon: <UserOutlined />,
-                  label: 'Create new clients',
-                },
-                {
-                  key: '2',
-                  icon: <VideoCameraOutlined />,
-                  label: 'Add clients',
-                },
-                {
-                  key: '3',
-                  icon: <UploadOutlined />,
-                  label: 'Create general meals',
-                },
-                {
-                  key: '4',
-                  icon: <UploadOutlined />,
-                  label: 'Profile',
-                },
-                {
-                  key: '5',
-                  icon: <UploadOutlined />,
-                  label: '',
-                },
-              ]}
-            />
-          </Sider>
+          <MySider/>
           <Layout>
             {/* Header */}
             <Header

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { UseUsers } from "../../providers/currentuserProvider/index";
-
 const Dashboard = () => {
   const { getCurrentUser, currentuser, isError, isPending } = UseUsers();
 
@@ -31,8 +30,8 @@ const Dashboard = () => {
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
       <h1>Welcome, {currentuser.data.name}</h1>
-      <p>Your email is: {currentuser.data.email}</p>
-      <p>Your user ID is: {currentuser.data.id}</p>
+      <p>Your email: {currentuser.data.email}</p>
+      <p>Trainer Id: {currentuser.data.id}</p>
     </div>
   );
 };

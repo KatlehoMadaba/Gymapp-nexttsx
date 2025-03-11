@@ -7,18 +7,9 @@ import styles from "../../page.module.css";
 import { ITrainer } from '../../providers/trainerProvider/context';
 import { UseTrainers} from "../../providers/trainerProvider/index"
 const TrainerRegister = () => {
-// const { createTrainer ,isError,isPending, TrainerCreated} = UseTrainers();
+  
 const { createTrainer ,isError,isPending} = UseTrainers();
 
-  // useEffect(() => {
-  //   getTrainers();
-  // }, []);
-
-  // useEffect(()=>{
-  //   if(TrainerCreated!=null){
-  //     console.log(TrainerCreated,"from sign up page");
-  //   }
-  // },[TrainerCreated])
 
   if (isPending) {
     return <div>Loading trainers...</div>;
