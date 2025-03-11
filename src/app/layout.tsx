@@ -4,6 +4,7 @@ import "./globals.css";
 import TrainerProvider from "./providers/trainerProvider";
 import CurrentProvider from "./providers/currentuserProvider";
 import ClientProvider from "./providers/clientProvider";
+import FoodItemProvider  from "./providers/foodProvider";
 // import { ConfigProvider } from "antd";
 
 const geistSans = Geist({
@@ -31,7 +32,11 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TrainerProvider>
           <CurrentProvider>
-            <ClientProvider>{children}</ClientProvider>
+          <ClientProvider>
+            <FoodItemProvider>
+            {children}
+            </FoodItemProvider>
+            </ClientProvider>
           </CurrentProvider>
         </TrainerProvider>
       </body>

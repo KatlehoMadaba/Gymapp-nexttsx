@@ -25,17 +25,16 @@ export interface IFoodItemStateContext {
   }
 
   export interface IFoodItemActionContext {
-    getFoodItems: () => void;      
+    getallFoodItems: () => void;      
     getFoodItem: (id: string) => void; 
     createFoodItem: (FoodItem: IFoodItem) => void;  
-    updateFoodItem: (FoodItem: IFoodItem) => void;  
-    deleteFoodItem: (id: string) => void;         
+    updateFoodItem: (FoodItem: IFoodItem) => void;         
   }
 
 export const INITIAL_STATE: IFoodItemStateContext = {
     isPending: false,  
     isSuccess: false,  
-    isError: false,    
+    isError: false,  
   };
   
 

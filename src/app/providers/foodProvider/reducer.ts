@@ -3,15 +3,15 @@ import { INITIAL_STATE, IFoodItemStateContext } from "./context";
 import { FoodItemActionEnums } from "./actions";
 
 export const FoodItemReducer = handleActions<IFoodItemStateContext, IFoodItemStateContext>({
-    [FoodItemActionEnums.getFoodItemsPending]: (state, action) => ({
+    [FoodItemActionEnums.getallFoodItemsPending]: (state, action) => ({
         ...state,
         ...action.payload,
     }),
-    [FoodItemActionEnums.getFoodItemsSuccess]: (state, action) => ({
+    [FoodItemActionEnums.getallFoodItemsSuccess]: (state, action) => ({
         ...state,
         ...action.payload,
     }),
-    [FoodItemActionEnums.getFoodItemsError]: (state, action) => ({
+    [FoodItemActionEnums.getallFoodItemsError]: (state, action) => ({
         ...state,
         ...action.payload,
     }),
@@ -19,7 +19,7 @@ export const FoodItemReducer = handleActions<IFoodItemStateContext, IFoodItemSta
         ...state,
         ...action.payload,
     }),
-    [FoodItemActionEnums.getFoodItemSuccess]: (state, action) => ({
+    [FoodItemActionEnums.getallFoodItemsuccess]: (state, action) => ({
         ...state,
         ...action.payload,
     }),

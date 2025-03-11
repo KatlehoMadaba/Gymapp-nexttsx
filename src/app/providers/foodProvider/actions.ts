@@ -3,12 +3,12 @@ import { IFoodItem, IFoodItemStateContext } from "./context";
 
 export enum FoodItemActionEnums {
   
-  getFoodItemsPending = "GET_FoodItemS_PENDING",
-  getFoodItemsSuccess = "GET_FoodItemS_SUCCESS",
-  getFoodItemsError = "GET_FoodItemS_ERROR",
+  getallFoodItemsPending = "GETALL_FoodItems_PENDING",
+  getallFoodItemsSuccess = "GETALL_FoodItems_SUCCESS",
+  getallFoodItemsError = "GETALL_FoodItems_ERROR",
 
   getFoodItemPending = "GET_FoodItem_PENDING",
-  getFoodItemSuccess = "GET_FoodItem_SUCCESS",
+  getallFoodItemsuccess = "GET_FoodItem_SUCCESS",
   getFoodItemError = "GET_FoodItem_ERROR",
 
   createFoodItemPending = "CREATE_FoodItem_PENDING",
@@ -24,21 +24,18 @@ export enum FoodItemActionEnums {
   deleteFoodItemError = "DELETE_FoodItem_ERROR",
 }
 
-
-
-
-export const getFoodItemsPending = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.getFoodItemsPending,
+export const getallFoodItemsPending = createAction<IFoodItemStateContext>(
+  FoodItemActionEnums.getallFoodItemsPending,
   
   () => ({ isPending: true, isSuccess: false, isError: false })
 );
 
 
-export const getFoodItemsSuccess = createAction<
+export const getallFoodItemsSuccess = createAction<
   IFoodItemStateContext, 
   IFoodItem[]           
 >(
-  FoodItemActionEnums.getFoodItemsSuccess,
+  FoodItemActionEnums.getallFoodItemsSuccess,
  
   (FoodItems: IFoodItem[]) => ({
     isPending: false,
@@ -48,8 +45,8 @@ export const getFoodItemsSuccess = createAction<
   })
 );
 
-export const getFoodItemsError = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.getFoodItemsError,
+export const getallFoodItemsError = createAction<IFoodItemStateContext>(
+  FoodItemActionEnums.getallFoodItemsError,
 
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
@@ -60,8 +57,8 @@ export const getFoodItemPending = createAction<IFoodItemStateContext>(
   () => ({ isPending: true, isSuccess: false, isError: false })
 );
 
-export const getFoodItemSuccess = createAction<IFoodItemStateContext, IFoodItem>(
-  FoodItemActionEnums.getFoodItemSuccess,
+export const getallFoodItemsuccess = createAction<IFoodItemStateContext, IFoodItem>(
+  FoodItemActionEnums.getallFoodItemsuccess,
   (FoodItem: IFoodItem) => ({
     isPending: false,
     isSuccess: true,
