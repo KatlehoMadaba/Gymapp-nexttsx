@@ -92,6 +92,33 @@ IClientStateContext>(
         isError: true })
 )
 
+export const registrationClientPending = createAction<IClientStateContext>(
+    ClientActionEnums.createClientPending,
+    () => ({ isPending: true, isSuccess: false, isError: false })
+)
+
+export const registrationClientSuccess = createAction<
+    IClientStateContext, IClient>(
+        ClientActionEnums.createClientSuccess,
+        (Client: IClient) => ({
+            isPending: false,
+            isSuccess: true,
+            isError: false,
+            Client
+        })
+    )
+
+export const registrationClientError = createAction<
+IClientStateContext>(
+    ClientActionEnums.createClientError,
+    () => ({ 
+        isPending: false, 
+        isSuccess: false, 
+        isError: true })
+)
+
+
+
 export const loginClientPending = createAction<
 IClientStateContext>(
     ClientActionEnums.createClientPending,

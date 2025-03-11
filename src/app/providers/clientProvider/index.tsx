@@ -7,6 +7,7 @@ import {
   IClient,
   IClientLogin,
   ILoginResponse,
+  IClientRegResponse,
 } from "./context";
 import { ClientReducer } from "./reducer";
 import { 
@@ -15,7 +16,11 @@ import {
   createClientSuccess,
   loginClientPending,
   loginClientError,
-  loginClientSuccess
+  loginClientSuccess,
+  registrationClientPending,
+  registrationClientSuccess,
+  registrationClientError,
+
 } from "./action";
 import axios from "axios";
 
@@ -76,6 +81,19 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
             dispatch(createClientError());   
         }
     };
+    const registerationClient = async (Client: IClient) => {
+      dispatch(registrationClientPending());
+      const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/register/mobile";
+      try {
+        console.log('Registering the client with:', Client);
+        const response = await axios.post<IClientRegResponse>(endpoint, Client);
+        console.log('Login response:', response.data);
+        dispatch(registrationClientSuccess(response.data));
+      } catch (error) {
+        console.error("Error during registering your user:", error.response?.data?.message || error);
+        dispatch(registrationClientError());
+      }
+    };
   const loginClient = async (Client: IClientLogin) => {
     dispatch(loginClientPending());
     const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
@@ -100,7 +118,7 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
     return (
           <ClientStateContext.Provider value={state}>
             <ClientActionContext.Provider
-              value={{createClient,loginClient }}>
+              value={{createClient,loginClient,registerationClient}}>
               {children}
             </ClientActionContext.Provider>
           </ClientStateContext.Provider>

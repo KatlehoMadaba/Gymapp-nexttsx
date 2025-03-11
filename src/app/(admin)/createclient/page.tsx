@@ -89,7 +89,7 @@ const CreateClient = () => {
             rules={[
               { required: false, message: "Please select your date of birth!" }
             ]}
-            initialValue=" "
+            initialValue=""
           >
             <DatePicker format="YYYY-MM-DD" className="date-picker" />
           </Form.Item>

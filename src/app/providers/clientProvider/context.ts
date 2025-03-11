@@ -12,6 +12,7 @@ export interface IClient{
     trial?:boolean;
     policiesAccepted?:boolean;
     message?:string;
+    dateOfBirth:string;
 }
 
 export interface IClientLogin{
@@ -19,12 +20,32 @@ export interface IClientLogin{
     password:string;
 }
 export interface ILoginResponse{
+    status:null;
+    message:string;
+    data:{
+        token:string;
+    }
+}
+export interface IClientRegResponse{
     status:number,
     message:string,
     data:{
-        token:string
+        id:string,
+        email:string,
+        name:string,
+        password:string,
+        contactNumber:string,
+        dateOfBirth:string,
+        role:string;
+        planType:string;
+        plan:string;
+        trail:string;
+        policiesAccepted:boolean;
+        date:string;
     }
 }
+
+
 
 export interface IClientStateContext{
     isPending:boolean;
@@ -38,6 +59,7 @@ export interface IClientStateContext{
  export interface IClientActionContext{
     createClient:(Client:IClient)=>void;
     loginClient:(Client:IClientLogin)=>void;
+    registerationClient:(Client:IClient)=>void;
  }
 
  export const INITIAL_STATE:IClientStateContext={
