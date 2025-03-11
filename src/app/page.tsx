@@ -16,13 +16,16 @@ const SplashPage = () => {
   const handleRedirecRegister=()=>{
     router.push("/register")
   }
+  const handlecreatUser=()=>{
+    router.push("/createclient")
+  }
   return (
     <div className={styles.page}>
       <main className={styles.main}>
           <Button onClick={handleRedirect}>Sign Up Trainer </Button>
           <Button onClick={handleRedirectLogin}>Login </Button>
           <Button onClick={handleRedirecRegister}>Register Client </Button>
-
+          <Button onClick={handlecreatUser}>Create</Button>
       </main>
     </div>
   );

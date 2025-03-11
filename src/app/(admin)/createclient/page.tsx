@@ -13,30 +13,36 @@ import {
 import { IClient } from "../../providers/clientProvider/context";
 import { UseClients } from "../../providers/clientProvider/index";
 import { UseUsers } from "../../providers/currentuserProvider/index";
+import dayjs from "dayjs";
 
 const CreateClient = () => {
   const [form] = Form.useForm();
 
-  const { createClient, isError, isPending } = UseClients();
-  const { currentuser } = UseUsers();
+  // const { createClient, isError, isPending } = UseClients();
+  // const { currentuser } = UseUsers();
 
-  // Check if currentuser is properly initialized
-  if (!currentuser || !currentuser.data) {
-    return <div>Loading...</div>;
-  }
+  // // Check if currentuser is properly initialized
+  // if (!currentuser || !currentuser.data) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isPending) {
-    return <div>creating new user ....</div>;
-  }
+  // if (isPending) {
+  //   return <div>creating new user ....</div>;
+  // }
 
-  if (isError) {
-    message.error("We were unable to create this user !", 2);
-    return null; // Return null to avoid rendering an invalid React child
-  }
+  // if (isError) {
+  //   message.error("We were unable to create this user !", 2);
+  //   return null; // Return null to avoid rendering an invalid React child
+  // }
 
   const onFinish = (values: IClient) => {
-    console.log("Created User form Submitted:", values);
-    createClient(values);
+    const formattedDateOfBirth = values.dateOfBirth
+      ? dayjs(values.dateOfBirth).format("YYYY-MM-DD")
+      : null;
+      const formData = { ...values, dateOfBirth: formattedDateOfBirth };
+      console.log("Created User form Submitted:", formData);
+      console.log(formData)
+    // createClient(values);
     message.success("Trainer registered successfully!", 2);
     form.resetFields();
   };
@@ -107,7 +113,8 @@ const CreateClient = () => {
           label="Trainer ID"
           name="trainerId"
           rules={[{ required: true, message: "Please enter trainer ID!" }]}
-          initialValue={currentuser.data.id} // Default value for Trainer ID
+          initialValue={"67cf0c43e2436c0019ae85b7"}
+          // initialValue={currentuser.data.id} // Default value for Trainer ID
           
         >
           <Input placeholder="Trainer ID" disabled />
