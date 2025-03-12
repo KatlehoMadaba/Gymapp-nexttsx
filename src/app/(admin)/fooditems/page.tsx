@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect } from "react";
 import { Button, Space, Spin, Alert } from "antd";
-//import { IFoodItem } from "@/app/providers/foodProvider/context";
-import { UseFoodItems } from "@/app/providers/foodProvider";
+import { UseFoodItems } from "../../providers/foodProvider/index";
 
 const FoodItems = () => {
   const { FoodItems, getallFoodItems, isPending, isSuccess, isError } = UseFoodItems();  
+
   const handleClick = () => {
     getallFoodItems(); 
   };
@@ -25,7 +25,6 @@ const FoodItems = () => {
           {isPending ? "Loading..." : "Show Food Items"}
         </Button>
 
-       
         {isPending && (
           <div style={{ textAlign: "center" }}>
             <Spin size="large" />
