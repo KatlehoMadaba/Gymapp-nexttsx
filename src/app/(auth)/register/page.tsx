@@ -31,7 +31,7 @@ const ClientRegister = () => {
     if (isSuccess) {
       message.success("Trainer registered successfully!", 2);
       form.resetFields();
-      router.push("/clientlogin")
+      router.push("/clientview")
     } 
   };
 
@@ -118,7 +118,7 @@ const ClientRegister = () => {
             valuePropName="checked"
             rules={[{ required: true, message: "You must accept the policies to proceed!" }]}
           >
-            <Switch checkedChildren="Accepted" unCheckedChildren="Not Accepted" />
+            <Switch checkedChildren="true" unCheckedChildren="false" />
           </Form.Item>
 
           <Form.Item>

@@ -4,12 +4,13 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/navigation";
 import styles from "../../page.module.css";
-import { UseUsers } from "../../providers/currentuserProvider/index";
-import { IClientLogin } from "@/app/providers/currentuserProvider/context"; // Make sure to define this for the client
+import { UseClients } from "../../providers/clientProvider/index";
+import {IClient} from "../../providers/clientProvider/context"
+
 
 const ClientLogin = () => {
-  const { isError, isPending } = UseUsers();
-  const { loginUser, isSuccess } = UseUsers(); // Assuming loginUser is the function for client login
+  const { isError, isPending } = UseClients();
+  const { loginClient, isSuccess } = UseClients(); // Assuming loginUser is the function for client login
   const router = useRouter();
 
   useEffect(() => {
@@ -23,12 +24,12 @@ const ClientLogin = () => {
   }
 
   if (isError) {
-    return <div>Sorry, I couldn't log you in</div>;
+    return <div>Sorry, I couldnt log you in</div>;
   }
 
-  const onFinish = async (values: IClientLogin) => {
+  const onFinish = async (values: IClient) => {
     console.log("Client login data:", values);
-    loginUser(values); // Call the loginUser function for client login
+    loginClient(values); // Call the loginUser function for client login
   };
 
   return (

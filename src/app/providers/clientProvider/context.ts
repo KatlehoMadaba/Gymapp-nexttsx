@@ -8,7 +8,7 @@ export interface IClient{
     name?:string;
     email?:string;
     password?:string;
-    confirmpassword?:string;
+    confirmPassword?:string;
     role?:string;
     contactNumber?:string;
     planType?:string;
@@ -55,10 +55,6 @@ export interface IExistingClientsResponse{
     ]  
 }
 
-export interface IClientLogin{
-    email:string;
-    password:string;
-}
 export interface ILoginResponse{
     status:null;
     message:string;
@@ -98,7 +94,7 @@ export interface IClientStateContext{
 
  export interface IClientActionContext{
     createClient:(Client:IClient)=>Promise<void>;
-    loginClient:(Client:IClientLogin)=>void;
+    loginClient:(Client:IClient)=>void;
     registerationClient:(Client:IClient)=>void;
     getClients:()=>void;
  }

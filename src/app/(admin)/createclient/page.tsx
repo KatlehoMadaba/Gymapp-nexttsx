@@ -23,9 +23,9 @@ const CreateClient = () => {
   const { currentuser } = UseUsers();
 
   // Check if currentuser is properly initialized
-  if (!currentuser || !currentuser.data) {
-    return <div>Loading...</div>;
-  }
+  // if (!currentuser || !currentuser.data) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (isPending) {
     <div style={{ textAlign: "center", padding: "2rem" }}>
@@ -125,8 +125,8 @@ const CreateClient = () => {
           label="Trainer ID"
           name="trainerId"
           rules={[{ required: true, message: "Please enter trainer ID!" }]}
-          initialValue={"67caa1c7f4836400195da168"}
-          //initialValue={currentuser.data.id} // Default value for Trainer ID
+          // initialValue={"67caa1c7f4836400195da168"}
+          initialValue={currentuser.data.id} // Default value for Trainer ID
           
         >
           <Input placeholder="Trainer ID" disabled />
