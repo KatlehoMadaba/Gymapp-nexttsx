@@ -31,9 +31,10 @@ const Dashboard = () => {
   useEffect(() => {
 
     if (token) {
+      
 
       getCurrentUser().then((user: ICurrentUser) => {
-
+        console.log("effect",user)
         getClients(user?.id);
 
       });

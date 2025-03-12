@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { Button, Space, Spin, Alert } from "antd";
-import { IFoodItem } from "@/app/providers/foodProvider/context";
+//import { IFoodItem } from "@/app/providers/foodProvider/context";
 import { UseFoodItems } from "@/app/providers/foodProvider";
 
 const FoodItems = () => {
