@@ -1,18 +1,13 @@
 "use client";
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button,
-     Form,
-     Input,
-     Switch,
-     DatePicker,
-     message,
- } from "antd";
+import { Button, Form, Input, Switch, DatePicker, message } from "antd";
 import styles from "../../page.module.css";
-import { IClient } from "../../providers/clientProvider/context"; 
+import { IClient } from "../../providers/clientProvider/context";
 import { UseClients } from "../../providers/clientProvider";
+
 const ClientRegister = () => {
-const [form] = Form.useForm();
+  const [form] = Form.useForm();
   const { registerationClient, isError, isPending } = UseClients();
 
   if (isPending) {
@@ -20,7 +15,7 @@ const [form] = Form.useForm();
   }
 
   if (isError) {
-    return <div>Sorry, we couldnt process your registration.</div>;
+    return <div>Sorry, we couldn't process your registration.</div>;
   }
 
   const onFinish = (values: IClient) => {
@@ -33,16 +28,18 @@ const [form] = Form.useForm();
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Client Registeration</h1>
+        <h1>Client Registration</h1>
         <Form
           name="clientRegister"
           initialValues={{ remember: true }}
           style={{ maxWidth: 360 }}
           onFinish={onFinish}
+          layout="vertical"  // Ensures labels are always on top
         >
           <Form.Item
             name="name"
             label="Full Name"
+            labelCol={{ span: 24 }}
             rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Full Name" />
@@ -51,6 +48,7 @@ const [form] = Form.useForm();
           <Form.Item
             name="email"
             label="Email"
+            labelCol={{ span: 24 }}
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Email" />
@@ -59,18 +57,16 @@ const [form] = Form.useForm();
           <Form.Item
             name="password"
             label="Password"
+            labelCol={{ span: 24 }}
             rules={[{ required: true, message: "Please input your Password!" }]}
           >
-            <Input
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Password"
-            />
+            <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
           </Form.Item>
 
           <Form.Item
             name="confirmPassword"
             label="Confirm Password"
+            labelCol={{ span: 24 }}
             dependencies={["password"]}
             rules={[
               { required: true, message: "Please confirm your Password!" },
@@ -84,49 +80,35 @@ const [form] = Form.useForm();
               }),
             ]}
           >
-            <Input
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Confirm Password"
-            />
+            <Input prefix={<LockOutlined />} type="password" placeholder="Confirm Password" />
           </Form.Item>
 
           <Form.Item
             label="Date of Birth"
             name="dateOfBirth"
-            rules={[
-              { required: false, message: "Please select your date of birth!" },
-            ]}
-            initialValue=""
+            labelCol={{ span: 24 }}
+            rules={[{ required: false, message: "Please select your date of birth!" }]}
           >
-            <DatePicker format="YYYY-MM-DD" className="date-picker" />
+            <DatePicker format="YYYY-MM-DD" className="date-picker" style={{ width: "100%" }} />
           </Form.Item>
 
           <Form.Item
             name="contactNumber"
             label="Contact Number"
-            rules={[
-              { required: true, message: "Please input your contact number!" },
-            ]}
+            labelCol={{ span: 24 }}
+            rules={[{ required: true, message: "Please input your contact number!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Contact Number" />
           </Form.Item>
 
           <Form.Item
             name="policiesAccepted"
-            valuePropName="checked"
             label="Accept Policies"
-            rules={[
-              {
-                required: true,
-                message: "You must accept the policies to proceed!",
-              },
-            ]}
+            labelCol={{ span: 24 }}
+            valuePropName="checked"
+            rules={[{ required: true, message: "You must accept the policies to proceed!" }]}
           >
-            <Switch
-              checkedChildren="Accepted"
-              unCheckedChildren="Not Accepted"
-            />
+            <Switch checkedChildren="Accepted" unCheckedChildren="Not Accepted" />
           </Form.Item>
 
           <Form.Item>
