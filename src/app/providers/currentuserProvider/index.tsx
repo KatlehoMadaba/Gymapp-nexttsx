@@ -57,8 +57,8 @@ const [state, dispatch] = useReducer(CurrentUserReducer, INITIAL_STATE);
         },
       });
       dispatch(getCurrentUserSuccess(response.data))
-      console.log("Current User Data:", response.data);
-      return response.data;
+      console.log("Current User Data:", response.data.data);
+      return response.data.data;
     } catch (error) {
       console.error("Error fetching the current user:", error.response?.data?.message || error);
       dispatch(getCurrentUserError());

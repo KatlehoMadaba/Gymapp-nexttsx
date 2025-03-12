@@ -10,7 +10,6 @@ import dayjs from "dayjs";
 
 const ClientRegister = () => {
   const router = useRouter();
-  const [form] = Form.useForm();
   const { registerationClient, isError, isPending, isSuccess } = UseClients();
 
   if (isPending) {
@@ -30,8 +29,7 @@ const ClientRegister = () => {
     registerationClient(formData);
     if (isSuccess) {
       message.success("Trainer registered successfully!", 2);
-      form.resetFields();
-      router.push("/clientview")
+      router.push("/clientlogin")
     } 
   };
 

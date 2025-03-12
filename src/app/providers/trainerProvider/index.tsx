@@ -36,7 +36,6 @@ import axios from "axios";
   return context;
 };
 
-
 const UseTrainers = () => {
   return {
     ...useTrainerState(),

@@ -1,6 +1,8 @@
 "use client"
 import { createContext } from "react";
+import {IClient} from "../clientProvider/context"
 export interface ITrainer{
+    id?:string;
     name:string;
     email:string;
     password:string;
@@ -31,8 +33,7 @@ export interface ITrainerStateContext{
     isSuccess:boolean;
     isError:boolean;
     Trainer?:ITrainer;
-    Trainers?:ITrainer[];
-    readonly TrainerCreated?:ITrainer;
+    clients?:IClient[];
 }
 
  export interface ITrainerActionContext{

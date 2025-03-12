@@ -5,7 +5,7 @@ import { UserOutlined, VideoCameraOutlined, UploadOutlined } from "@ant-design/i
 const { Sider } = Layout;
 const MySider = () => {
   const router = useRouter();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed] = useState(false);
   const handleclearsession=()=>{
     sessionStorage.clear()
     router.push("/")
