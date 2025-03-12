@@ -5,7 +5,6 @@ import {
   ClientActionContext,
   INITIAL_STATE,
   IClient,
-  ILoginResponse,
 } from "./context";
 import { ClientReducer } from "./reducer";
 import {
