@@ -5,7 +5,7 @@ import { UserOutlined, VideoCameraOutlined, UploadOutlined } from "@ant-design/i
 const { Sider } = Layout;
 const MySider = () => {
   const router = useRouter();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed] = useState(false);
   const handleclearsession=()=>{
     sessionStorage.clear()
     router.push("/")
@@ -15,7 +15,7 @@ const MySider = () => {
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className="demo-logo-vertical" />
       <div style={{ padding: '16px' }}>
-        {/* Create New Clients Button */}
+
         <Button
           type="default"
           icon={<UserOutlined />}
@@ -25,7 +25,6 @@ const MySider = () => {
           Create new clients
         </Button>
 
-        {/* Other Buttons */}
         <Button
           type="default"
           icon={<VideoCameraOutlined />}
@@ -44,7 +43,7 @@ const MySider = () => {
           Profile
         </Button>
 
-         {/* Other Buttons */}
+
          <Button
           type="default"
           icon={<UploadOutlined />}

@@ -25,7 +25,7 @@ export interface IFoodItemStateContext {
   }
 
   export interface IFoodItemActionContext {
-    getallFoodItems: () => void;      
+    getallFoodItems: () => void;
     getFoodItem: (id: string) => void; 
     createFoodItem: (FoodItem: IFoodItem) => void;  
     updateFoodItem: (FoodItem: IFoodItem) => void;         

@@ -50,8 +50,8 @@ export default function DashboardLayout({
             }}
           />
           {/* does must correctly expects dashboard to execute first */}
-          {/* <div style={{ fontSize: "18px", fontWeight: "bold" }}>Welcome : {currentuser.data.name}</div>
-          <div style={{ fontSize: "16px", color: "gray" }}>Trainer: {currentuser.data.id.substring(1,8)} </div>  */}
+           <div style={{ fontSize: "18px", fontWeight: "bold" }}>Welcome to gym time </div>
+          {/*<div style={{ fontSize: "16px", color: "gray" }}>Trainer: {currentuser.data.id.substring(1,8)} </div>  */}
         </Header>
 
         {/* Main Content */}

@@ -1,18 +1,19 @@
 import { createContext } from "react";
 export interface ICurrentUser{
-    status:number;
-    message:string;
+    id?:string;
+    status?:number;
+    message?:string;
     data?:{
-        id: string;
-        name: string;
-        email: string;
+        id?: string;
+        name?: string;
+        email?: string;
         password?:string;
-        role: string;
-        contactNumber: string;
+        role?: string;
+        contactNumber?: string;
         dateOfBirth?:string;
-        activeState: boolean;
-        planType: string;
-        trial: boolean;
+        activeState?: boolean;
+        planType?: string;
+        trial?: boolean;
         policiesAccepted?:boolean
         date?:string;
     };
@@ -27,8 +28,7 @@ export interface ICurrentStateContext{
 
 
 export interface ICurrentUserActionContext{    
-    getCurrentUser:()=>void;
-
+    getCurrentUser:()=>Promise<ICurrentUser>;
 }
 
 export const INITIAL_STATE:ICurrentStateContext={

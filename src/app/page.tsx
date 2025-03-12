@@ -7,25 +7,32 @@ import {useRouter} from "next/navigation";
 
 const SplashPage = () => {
   const router =useRouter();
-  const handleRedirect=()=>{
-    router.push("/signup")
+  // const handleRedirect=()=>{
+  //   router.push("/signup")
+  // }
+  // const handleRedirectLogin=()=>{
+  //   router.push("/login")
+  // }
+ 
+  // const handlecreatUser=()=>{
+  //   router.push("/createclient")
+  // }
+ 
+  const handleTrainer=()=>{
+    router.push("/adminview")
   }
-  const handleRedirectLogin=()=>{
-    router.push("/login")
+  const handleClient=()=>{
+    router.push("/clientview")
   }
-  const handleRedirecRegister=()=>{
-    router.push("/register")
-  }
-  const handlecreatUser=()=>{
-    router.push("/createclient")
-  }
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-          <Button onClick={handleRedirect}>Sign Up Trainer </Button>
-          <Button onClick={handleRedirectLogin}>Login </Button>
-          <Button onClick={handleRedirecRegister}>Register Client </Button>
-          <Button onClick={handlecreatUser}>Create</Button>
+        <Button onClick={handleTrainer}>Trainer</Button>
+        <Button onClick={handleClient}>Client</Button>
+          {/* 
+          
+          <Button onClick={handlecreatUser}>Create</Button> */}
       </main>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client"
 import { useContext, useReducer } from "react";
-import { getAxiosInstace } from "../../utilis/axiosInstance";
+// import { getAxiosInstace } from "../../utilis/axiosInstance";
 import { 
     INITIAL_STATE, 
     IFoodItem, 
@@ -49,7 +49,7 @@ const useFoodItemState = () => {
   const FoodItemProvider = ({children}: {children: React.ReactNode}) => {
 
     const [state, dispatch] = useReducer(FoodItemReducer, INITIAL_STATE);
-    const instance = getAxiosInstace();
+    // const instance = getAxiosInstace();
 
     const getallFoodItems = async() => {
         // const token=sessionStorage.getItem("jwtToken");
@@ -81,7 +81,7 @@ const useFoodItemState = () => {
     const getFoodItem = async(id: string) => {
         dispatch(getFoodItemPending());
         const endpoint = `/FoodItems/${id}`;
-        await instance.get(endpoint)
+        await axios.get(endpoint)
         .then((response) => {
             dispatch(getallFoodItemsuccess(response.data));
         })
@@ -94,7 +94,7 @@ const useFoodItemState = () => {
     const createFoodItem = async(FoodItem: IFoodItem) => {
         dispatch(createFoodItemPending());
         const endpoint = `/FoodItems`;
-        await instance.post(endpoint, FoodItem)
+        await axios.post(endpoint, FoodItem)
         .then((response) => {
             dispatch(createFoodItemSuccess(response.data));
         })
@@ -106,8 +106,8 @@ const useFoodItemState = () => {
 
     const updateFoodItem = async( FoodItem: IFoodItem) => {
         dispatch(updateFoodItemPending());
-        const endpoint = `/FoodItems/${FoodItem.id}`;
-        await instance.put(endpoint, FoodItem)
+        const endpoint = `/FoodItems/${FoodItem?._id}`;
+        await axios.put(endpoint, FoodItem)
         .then((response) => {
             dispatch(updateFoodItemSuccess(response.data));
         })
