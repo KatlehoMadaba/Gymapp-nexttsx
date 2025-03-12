@@ -1,0 +1,66 @@
+import {handleActions} from "redux-actions"
+import { ClientActionEnums } from "./action";
+import { INITIAL_STATE, IClientStateContext } from './context';
+
+export const ClientReducer=handleActions<IClientStateContext,IClientStateContext>({
+    [ClientActionEnums.getClientsMealplansPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.getClientsMealplansSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.getClientsMealplansError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.getClientsPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.getClientsSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.getClientsError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.createClientPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.createClientSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.createClientError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.registrationClientPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.registrationClientSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.registrationClientError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.loginClientPending]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.loginClientSuccess]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    }),
+    [ClientActionEnums.loginClientError]:(state,action)=>({
+        ...state,
+        ...action.payload,
+    })
+},INITIAL_STATE)
