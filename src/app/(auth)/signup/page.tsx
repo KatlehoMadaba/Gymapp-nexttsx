@@ -1,37 +1,34 @@
 "use client"
-// import React,{useEffect}from "react";
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input,Switch} from "antd";
+import { Button, Form, Input, Switch } from "antd";
 import styles from "../../page.module.css";
 import { ITrainer } from '../../providers/trainerProvider/context';
-import { UseTrainers} from "../../providers/trainerProvider/index"
+import { UseTrainers } from "../../providers/trainerProvider/index";
 import { useRouter } from "next/navigation";
+
 const TrainerRegister = () => {
-  //const router = useRouter();
-  
-  const { createTrainer ,isError,isPending} = UseTrainers();
-  
+  const { createTrainer, isError, isPending } = UseTrainers();
 
   if (isPending) {
     return <div>Loading trainers...</div>;
   }
 
-  // Show error state
   if (isError) {
-    return <div>Sorry I couldnt sign you update</div>;
-  }else{
-    console.log("well done you have signed up ")
+    return <div>Sorry I couldn't sign you up</div>;
+  } else {
+    console.log("Well done, you have signed up!");
   }
+
   const onFinish = (values: ITrainer) => {
     console.log("Received values of form: ", values);
-      createTrainer(values) 
-      //router.push("/login");
+    createTrainer(values);
   };
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <h1>Sign Up as a Trainer</h1> {/* Added heading here */}
         <Form
           name="login"
           initialValues={{ remember: true }}
@@ -40,12 +37,15 @@ const TrainerRegister = () => {
         >
           <Form.Item
             name="name"
+            label="Name"
             rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Name" />
           </Form.Item>
+
           <Form.Item
             name="email"
+            label="Email"
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Email" />
@@ -53,6 +53,7 @@ const TrainerRegister = () => {
 
           <Form.Item
             name="password"
+            label="Password"
             rules={[{ required: true, message: "Please input your Password!" }]}
           >
             <Input
@@ -61,16 +62,18 @@ const TrainerRegister = () => {
               placeholder="Password"
             />
           </Form.Item>
+
           <Form.Item
             name="confirmPassword"
+            label="Confirm Password"
             dependencies={['password']}
             rules={[{ required: true, message: "Please input your Password!" },
-            ({getFieldValue})=>({
-              validator(_,value){
-                if(!value || getFieldValue('password')===value){
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject("You passwords are not matching!")
+                return Promise.reject("You passwords are not matching!");
               }
             })
             ]}
@@ -81,53 +84,58 @@ const TrainerRegister = () => {
               placeholder="confirmPassword"
             />
           </Form.Item>
+
           <Form.Item
             name="role"
+            label="Role"
             rules={[{ required: true, message: "Please input your role!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="role" />
           </Form.Item>
+
           <Form.Item
             name="contactNumber"
+            label="Contact Number"
             rules={[{ required: true, message: "Please input your contact number!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="number" />
           </Form.Item>
+
           <Form.Item
-            name="activeState"  
+            name="activeState"
+            label="Active State"
             valuePropName="checked"
             rules={[{ required: true, message: "Please input your activeState!" }]}
           >
             <Switch checkedChildren="true" unCheckedChildren="false" />
-            
-            {/* <Input prefix={<UserOutlined />} placeholder="activeState" /> */}
           </Form.Item>
 
           <Form.Item
             name="planType"
+            label="Plan Type"
             rules={[{ required: true, message: "Please input your planType!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="planType" />
           </Form.Item>
-      
+
           <Form.Item
             name="trial"
+            label="Trial"
             valuePropName="checked"
             rules={[{ required: true, message: "Please input your trial!" }]}
           >
-            {/* <Input prefix={<UserOutlined />} placeholder="trail" /> */}
-          <Switch checkedChildren="true" unCheckedChildren="false" />
+            <Switch checkedChildren="true" unCheckedChildren="false" />
           </Form.Item>
 
           <Form.Item
             name="policiesAccepted"
+            label="Policies Accepted"
             valuePropName="checked"
-            rules={[{ required: true, message: "Policies not accpeted you cant move own with out accepting!" }]}
+            rules={[{ required: true, message: "Policies not accepted you can't move on without accepting!" }]}
           >
-            {/* <Input prefix={<UserOutlined />} placeholder="policiesAccpted" /> */}
-          <Switch checkedChildren="true" unCheckedChildren="false" />
-
+            <Switch checkedChildren="true" unCheckedChildren="false" />
           </Form.Item>
+
           <Form.Item>
             <Button block type="primary" htmlType="submit">
               Sign Up
