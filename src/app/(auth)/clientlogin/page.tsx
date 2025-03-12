@@ -11,6 +11,7 @@ const ClientLogin = () => {
   const { isError, isPending } = UseUsers();
   const { loginUser, isSuccess } = UseUsers(); // Assuming loginUser is the function for client login
   const router = useRouter();
+
   useEffect(() => {
     if (isSuccess) {
       router.push("/client-dashboard"); // Redirect to client's dashboard after successful login
