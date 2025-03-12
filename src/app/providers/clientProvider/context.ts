@@ -1,8 +1,12 @@
 "use client"
 import { createContext } from "react";
+
+
 export interface IClient{
-    name:string;
-    email:string;
+    id?:string
+    fullName:string
+    name?:string;
+    email?:string;
     password?:string;
     confirmpassword?:string;
     role?:string;
@@ -13,6 +17,8 @@ export interface IClient{
     policiesAccepted?:boolean;
     message?:string;
     dateOfBirth:string;
+    sex?:string;
+    trainerid?:string;
 }
 export interface IExistingClientsResponse{
     data:[
@@ -91,7 +97,7 @@ export interface IClientStateContext{
 }
 
  export interface IClientActionContext{
-    createClient:(Client:IClient)=>void;
+    createClient:(Client:IClient)=>Promise<void>;
     loginClient:(Client:IClientLogin)=>void;
     registerationClient:(Client:IClient)=>void;
     getClients:()=>void;

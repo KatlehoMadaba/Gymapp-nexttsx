@@ -4,7 +4,6 @@ import { Card, Col, Row, Spin, Avatar} from "antd";
 import { useRouter } from "next/navigation";
 import { UseUsers } from "../../providers/currentuserProvider/index";
 import { UseClients } from "@/app/providers/clientProvider";
-import { get } from "axios";
 const Dashboard = () => {
   const {getCurrentUser, currentuser, isError, isPending } = UseUsers();
   const {getClients,Clients}=UseClients();
@@ -25,7 +24,7 @@ const Dashboard = () => {
 
  
   // useEffect(()=>{
-  //  getClients()
+  //   getCurrentUser();
   // },[])
 
   if (isPending) {

@@ -5,24 +5,34 @@ import { Button, Form, Input, Switch, DatePicker, message } from "antd";
 import styles from "../../page.module.css";
 import { IClient } from "../../providers/clientProvider/context";
 import { UseClients } from "../../providers/clientProvider";
+import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
 
 const ClientRegister = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
-  const { registerationClient, isError, isPending } = UseClients();
+  const { registerationClient, isError, isPending, isSuccess } = UseClients();
 
   if (isPending) {
     return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <div>Sorry, we couldn't process your registration.</div>;
+    return <div>Sorry, we couldnt process your registration.</div>;
   }
 
   const onFinish = (values: IClient) => {
-    console.log("Received values of form: ", values);
-    registerationClient(values);
-    message.success("Trainer registered successfully!", 2);
-    form.resetFields();
+    const formattedDateOfBirth = values.dateOfBirth
+      ? dayjs(values.dateOfBirth).format("YYYY-MM-DD")
+      : null;
+    const formData = { ...values, dateOfBirth: formattedDateOfBirth };
+    console.log("Created User form Submitted:", formData);
+    registerationClient(formData);
+    if (isSuccess) {
+      message.success("Trainer registered successfully!", 2);
+      form.resetFields();
+      router.push("/clientlogin")
+    } 
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   DatePicker,
   Checkbox,
   message,
+  Spin,
 } from "antd";
 import { IClient } from "../../providers/clientProvider/context";
 import { UseClients } from "../../providers/clientProvider/index";
@@ -18,7 +19,7 @@ import dayjs from "dayjs";
 const CreateClient = () => {
   const [form] = Form.useForm();
 
-  const { createClient, isError, isPending } = UseClients();
+  const { createClient, isError, isPending,isSuccess} = UseClients();
   const { currentuser } = UseUsers();
 
   // Check if currentuser is properly initialized
@@ -27,12 +28,16 @@ const CreateClient = () => {
   }
 
   if (isPending) {
-    return <div>creating new user ....</div>;
+    <div style={{ textAlign: "center", padding: "2rem" }}>
+    <Spin tip="Loading current user data..." />
+  </div>
   }
 
   if (isError) {
     message.error("We were unable to create this user !", 2);
-    return null; // Return null to avoid rendering an invalid React child
+    alert("Sorry we couldnt create this user!")
+    form.resetFields();
+    
   }
 
   const onFinish = (values: IClient) => {
@@ -43,8 +48,15 @@ const CreateClient = () => {
       console.log("Created User form Submitted:", formData);
       console.log(formData)
       createClient(formData);
-    message.success("Trainer registered successfully!", 2);
-    form.resetFields();
+      if(isPending){
+        <p>Please hold we are submiting your form</p>
+      }
+      if(isSuccess){
+        message.success("Trainer registered successfully!", 2);
+        form.resetFields();
+      }else{
+        
+      }
   };
 
   return (
@@ -113,8 +125,8 @@ const CreateClient = () => {
           label="Trainer ID"
           name="trainerId"
           rules={[{ required: true, message: "Please enter trainer ID!" }]}
-          //initialValue={"67cf0c43e2436c0019ae85b7"}
-          initialValue={currentuser.data.id} // Default value for Trainer ID
+          initialValue={"67caa1c7f4836400195da168"}
+          //initialValue={currentuser.data.id} // Default value for Trainer ID
           
         >
           <Input placeholder="Trainer ID" disabled />

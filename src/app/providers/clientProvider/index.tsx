@@ -59,10 +59,11 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
     const {currentuser} =UseUsers();
     const [state, dispatch] = useReducer(ClientReducer, INITIAL_STATE);
 
-    const createClient = async (Client: IClient) => {
+    const createClient = async (clientdata: IClient) => {
       const token=sessionStorage.getItem("jwtToken");
+      //const token="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Y2FhMWM3ZjQ4MzY0MDAxOTVkYTE2OCIsIm5hbWUiOiJ0ZXN0IHRyYWluZXIgMiIsInJvbGUiOiJhZG1pbiIsImZlYXR1cmVzIjpbXSwiaWF0IjoxNzQxNzY0NTA0LCJleHAiOjE3NDIzNjkzMDR9.FBR5xQqA-xpUnLHRRERUaOO9iQ_xF5nFk4zw9P0WpPM"
       dispatch(createClientPending());
-      console.log("this is the token createCliet:",token)
+      console.log("this is the token createClient:",token)
       if(!token){
         console.error("Your user doesnt have exsting token @ createclient")
       return
@@ -71,14 +72,14 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
         const authHeader=token.startsWith("Bearer") ? token : `Bearer ${token}`;
         console.log("token from create client:",authHeader)
         try {
-            console.log('Sending Client data',Client);
-            const response=await axios.post<IClient>(endpoint,{
+            console.log('Sending Client data',clientdata);
+            const response=await axios.post(endpoint,clientdata,{
               headers:{
                 Authorization: authHeader,
               },
             });
             dispatch(createClientSuccess(response.status));
-            console.log('Response',response.status);
+            console.log('Response this is the success of creating your client',response.status);
             console.log("created the client towards the end:", response.status);
             //route you to login page
         } catch (error) {
