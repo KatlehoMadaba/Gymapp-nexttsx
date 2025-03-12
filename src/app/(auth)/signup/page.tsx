@@ -5,7 +5,7 @@ import { Button, Form, Input, Switch } from "antd";
 import styles from "../../page.module.css";
 import { ITrainer } from '../../providers/trainerProvider/context';
 import { UseTrainers } from "../../providers/trainerProvider/index";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const TrainerRegister = () => {
   const { createTrainer, isError, isPending } = UseTrainers();
@@ -15,7 +15,7 @@ const TrainerRegister = () => {
   }
 
   if (isError) {
-    return <div>Sorry I couldn't sign you up</div>;
+    return <div>Sorry I couldnt sign you up</div>;
   } else {
     console.log("Well done, you have signed up!");
   }

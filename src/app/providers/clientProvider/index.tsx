@@ -23,6 +23,8 @@ import {
 } from "./action";
 import { UseUsers } from "../currentuserProvider/index";
 import axios from "axios";
+import { ILoginResponse } from "../trainerProvider/context";
+import { ICurrentUser } from "../currentuserProvider/context";
 
 const useClientState = () => {
   const context = useContext(ClientStateContext);
@@ -113,7 +115,7 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       console.log("Logging in user with:",clientdata);
       const response = await axios.post<ILoginResponse>(endpoint, clientdata);
-      console.log("Login response:", response.data);
+      console.log("Login response:", response);
       //destucture at some point please
       const token = response.data.data.token;
       if (token) {
@@ -148,7 +150,7 @@ const ClientProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("token from create client:", authHeader);
     try {
       console.log("Getting the clients data Client data");
-      const response = await axios.get(endpoint, {
+      const response = await axios.get<ICurrentUser>(endpoint, {
         headers: {
           Authorization: authHeader,
         },

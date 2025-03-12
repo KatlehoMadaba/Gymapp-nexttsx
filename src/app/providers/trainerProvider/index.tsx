@@ -67,9 +67,10 @@ const TrainerProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch(loginTrainerPending());
     const endpoint = "https://body-vault-server-b9ede5286d4c.herokuapp.com/api/users/login";
     try {
+      debugger
       console.log('Logging in user with:', Trainer);
       const response = await axios.post<ILoginResponse>(endpoint, Trainer);
-      console.log('Login response:', response.data);
+      console.log('Login response:', response);
       //destucture at some point please 
       const token = response.data.data.token; 
       if (token) {

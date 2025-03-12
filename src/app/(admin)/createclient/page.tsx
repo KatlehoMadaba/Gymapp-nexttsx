@@ -126,7 +126,7 @@ const CreateClient = () => {
           name="trainerId"
           rules={[{ required: true, message: "Please enter trainer ID!" }]}
           // initialValue={"67caa1c7f4836400195da168"}
-          initialValue={currentuser.data.id} // Default value for Trainer ID
+          initialValue={currentuser?.data?.id} // Default value for Trainer ID
           
         >
           <Input placeholder="Trainer ID" disabled />
