@@ -1,7 +1,7 @@
 "use client"
 import { createContext } from "react";
 export interface IFoodItem{
-  data?:{
+  data:{
     _id?: string,
     name: string,
     category: string,
@@ -16,9 +16,10 @@ export interface IFoodItem{
     cholesterol: number,
     energy: number,
     date?: string,
-  }
-  
+  } 
 }
+  
+
 export interface IFoodItemStateContext {
     isPending: boolean;  
     isSuccess: boolean;  

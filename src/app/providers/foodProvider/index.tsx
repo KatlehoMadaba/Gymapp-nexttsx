@@ -68,8 +68,8 @@ const useFoodItemState = () => {
               Authorization: authHeader,
             },
           });
-          dispatch(getallFoodItemsSuccess(response.data?.data));
-          console.log("Geting the all the food itemas was a success",response?.data?.data)
+          dispatch(getallFoodItemsSuccess(response?.data?.data));
+          console.log("Geting the all the food itemas was a success",response?.data)
        }catch(error){
         console.error("Error fetching clients:", error);
         dispatch(getallFoodItemsError());
@@ -79,9 +79,9 @@ const useFoodItemState = () => {
     const getFoodItem = async(id: string) => {
         dispatch(getFoodItemPending());
         const endpoint = `/FoodItems/${id}`;
-        await axios.get(endpoint)
+        await axios.get<IFoodItem>(endpoint)
         .then((response) => {
-            dispatch(getallFoodItemsuccess(response.data));
+            dispatch(getallFoodItemsuccess(response.data.data));
         })
         .catch((error) => {
             console.error(error);
