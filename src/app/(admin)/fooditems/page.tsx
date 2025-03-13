@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Table, Spin, Alert } from "antd";
+import { Table, Input, Button, Space, Spin, Alert } from "antd";
 import { UseFoodItems } from "../../providers/foodProvider/";
 
 const FoodItems = () => {
-  const [items, setItems] = useState([]);
-  const { FoodItems, isPending, isError, getallFoodItems } = UseFoodItems();
+  const [items, setItems] = useState([]); // Use any[] for the initial state (or you can use IFoodItem[] if you have that interface)
+  const { FoodItems, getallFoodItems, isPending, isSuccess, isError } = UseFoodItems();
+  const [searchText, setSearchText] = useState<string>("");
 
   // Automatically fetch food items when the page loads
   useEffect(() => {
@@ -13,18 +14,26 @@ const FoodItems = () => {
   }, []); // Empty dependency array means it runs once when the page loads
 
   useEffect(() => {
-    if (FoodItems) {
+    if (isSuccess && FoodItems) {
       setItems(FoodItems); // Set the fetched food items into the state
       console.log("Fetched food items:", FoodItems);
     }
-  }, [FoodItems]); // Runs whenever FoodItems is updated
+  }, [isSuccess, FoodItems]); // Runs whenever FoodItems is updated
+
+  const handleSearch = (value: string) => {
+    setSearchText(value);
+  };
+
+  const filteredItems = items.filter((foodItem) => {
+    return foodItem.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      foodItem.category.toLowerCase().includes(searchText.toLowerCase());
+  });
 
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
       title: "Category",
@@ -85,33 +94,48 @@ const FoodItems = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Food Items</h1>
+      <Space direction="vertical" size="large">
+        <Button type="primary" onClick={() => getallFoodItems()} loading={isPending}>
+          {isPending ? "Loading..." : "Show Food Items"}
+        </Button>
 
-      {isPending && (
-        <div style={{ textAlign: "center" }}>
-          <Spin size="large" />
-        </div>
-      )}
-
-      {isError && (
-        <Alert
-          message="Error fetching food items"
-          type="error"
-          showIcon
-          style={{ marginTop: 20 }}
+        {/* Search Input */}
+        <Input
+          placeholder="Search by name or category"
+          onChange={(e) => handleSearch(e.target.value)}
+          value={searchText}
+          style={{ marginTop: 20, width: 200 }}
         />
-      )}
 
-      {Array.isArray(items) && items.length > 0 ? (
-        <Table
-          columns={columns}
-          dataSource={items}
-          rowKey={(record) => record.id} // Assuming each food item has a unique `id` field
-          pagination={{ pageSize: 10 }}
-        />
-      ) : (
-        <p>No food items available.</p>
-      )}
+        {/* Show loading spinner when data is pending */}
+        {isPending && (
+          <div style={{ textAlign: "center" }}>
+            <Spin size="large" />
+          </div>
+        )}
+
+        {/* Show error alert when there is an error fetching food items */}
+        {isError && (
+          <Alert
+            message="Error fetching food items"
+            type="error"
+            showIcon
+            style={{ marginTop: 20 }}
+          />
+        )}
+
+        {/* Render table with filtered data */}
+        {Array.isArray(filteredItems) && filteredItems.length > 0 ? (
+          <Table
+            columns={columns}
+            dataSource={filteredItems}
+            rowKey="id" // Assuming each food item has a unique `id`
+            pagination={{ pageSize: 10 }}
+          />
+        ) : (
+          <p>No food items available.</p>
+        )}
+      </Space>
     </div>
   );
 };
