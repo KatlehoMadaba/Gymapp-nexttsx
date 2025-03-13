@@ -29,27 +29,34 @@ const MySider = () => {
           type="default"
           icon={<VideoCameraOutlined />}
           style={{ width: '100%', marginBottom: '10px' }}
-          onClick={() => { /* Handle Add clients */ }}
+          onClick={() => {router.push("/mealplans/mealitems")}}
         >
-          Add clients
+          View Meal Items
         </Button>
 
         <Button
           type="default"
-          icon={<UploadOutlined />}
+          icon={<VideoCameraOutlined />}
           style={{ width: '100%', marginBottom: '10px' }}
-          onClick={() => { /* Handle Profile */ }}
+          onClick={() => { router.push("/mealplans");}}
         >
-          Profile
+          View Meal Plans 
         </Button>
-
-
+        <Button
+          type="default"
+          icon={<VideoCameraOutlined />}
+          style={{ width: '100%', marginBottom: '10px' }}
+          onClick={() => { router.push("/fooditems");}}
+        >
+          View food Items 
+        </Button>
          <Button
           type="default"
           icon={<UploadOutlined />}
           style={{ width: '100%', marginBottom: '10px' }}
           onClick={() => {handleclearsession()}}
         >
+          
           Logout
         </Button>
       </div>

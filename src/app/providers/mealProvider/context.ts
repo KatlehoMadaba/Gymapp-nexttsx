@@ -21,20 +21,21 @@ export interface IMealPlanStateContext {
     isSuccess: boolean;  
     isError: boolean;    
     MealPlan?: IMealPlan;  
-    MealPlans?: IMealPlan[]; 
+    MealPlans?: IMealPlan[];
   }
 
   export interface IMealPlanActionContext {
     getallMealPlans: () => void;
     getMealPlan: (id: string) => void; 
     createMealPlan: (MealPlan: IMealPlan) => void;  
-    updateMealPlan: (MealPlan: IMealPlan) => void;         
+    getMealItems: (MealPlan: IMealPlan) => void;         
+    getMealItem: (MealPlan: IMealPlan) => void;         
   }
 
 export const INITIAL_STATE: IMealPlanStateContext = {
     isPending: false,  
     isSuccess: false,  
-    isError: false,  
+    isError: false, 
   };
   
 

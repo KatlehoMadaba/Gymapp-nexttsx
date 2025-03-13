@@ -17,12 +17,11 @@ import {
     getallFoodItemsuccess, 
     createFoodItemPending, 
     createFoodItemError, 
-    updateFoodItemSuccess, 
     createFoodItemSuccess, 
-    updateFoodItemPending, 
-    updateFoodItemError, 
+
 } from "./actions";
 import axios from "axios";
+
 const useFoodItemState = () => {
     const context =useContext(FoodItemStateContext);
     if (!context) {
@@ -52,8 +51,7 @@ const useFoodItemState = () => {
     // const instance = getAxiosInstace();
 
     const getallFoodItems = async() => {
-        // const token=sessionStorage.getItem("jwtToken");
-         const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Y2FhMWM3ZjQ4MzY0MDAxOTVkYTE2OCIsIm5hbWUiOiJ0ZXN0IHRyYWluZXIgMiIsInJvbGUiOiJhZG1pbiIsImZlYXR1cmVzIjpbXSwiaWF0IjoxNzQxMzM3NjAxLCJleHAiOjE3NDE5NDI0MDF9.JFQUc66Czls-WRAirbQ1usByTFWyoh9sJtIWt6IOByU"
+        const token=sessionStorage.getItem("jwtToken");
         console.log("this is the token getClients:",token)
         dispatch(getallFoodItemsPending());
         if(!token){
@@ -65,13 +63,13 @@ const useFoodItemState = () => {
         const endpoint="https://body-vault-server-b9ede5286d4c.herokuapp.com/api/food";
        try{
         console.log('Getting aLL the food items');
-          const response=await axios.get(endpoint,{
+          const response=await axios.get<IFoodItem>(endpoint,{
             headers:{
               Authorization: authHeader,
             },
           });
-          dispatch(getallFoodItemsSuccess(response.data));
-          console.log("Geting the all the food itemas was a success",response.data)
+          dispatch(getallFoodItemsSuccess(response?.data?.data));
+          console.log("Geting the all the food itemas was a success",response?.data)
        }catch(error){
         console.error("Error fetching clients:", error);
         dispatch(getallFoodItemsError());
@@ -81,9 +79,9 @@ const useFoodItemState = () => {
     const getFoodItem = async(id: string) => {
         dispatch(getFoodItemPending());
         const endpoint = `/FoodItems/${id}`;
-        await axios.get(endpoint)
+        await axios.get<IFoodItem>(endpoint)
         .then((response) => {
-            dispatch(getallFoodItemsuccess(response.data));
+            dispatch(getallFoodItemsuccess(response.data.data));
         })
         .catch((error) => {
             console.error(error);
@@ -93,7 +91,7 @@ const useFoodItemState = () => {
 
     const createFoodItem = async(FoodItem: IFoodItem) => {
         dispatch(createFoodItemPending());
-        const endpoint = `/FoodItems`;
+        const endpoint = process.env.NEXT_PUBLIC_CREATE_FOOD_ITEM_ENDPOINT
         await axios.post(endpoint, FoodItem)
         .then((response) => {
             dispatch(createFoodItemSuccess(response.data));
@@ -104,21 +102,11 @@ const useFoodItemState = () => {
         });
     }
 
-    const updateFoodItem = async( FoodItem: IFoodItem) => {
-        dispatch(updateFoodItemPending());
-        const endpoint = `/FoodItems/${FoodItem?._id}`;
-        await axios.put(endpoint, FoodItem)
-        .then((response) => {
-            dispatch(updateFoodItemSuccess(response.data));
-        })
-        .catch((error) => {
-            console.error(error);
-            dispatch(updateFoodItemError());
-        });
-    }
+  
+
     return(
         <FoodItemStateContext.Provider value={state}>
-            <FoodItemActionContext.Provider value={{getallFoodItems, getFoodItem, createFoodItem, updateFoodItem}}>
+            <FoodItemActionContext.Provider value={{getallFoodItems, getFoodItem, createFoodItem}}>
                 {children}
             </FoodItemActionContext.Provider>
         </FoodItemStateContext.Provider>

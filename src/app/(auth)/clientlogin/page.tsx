@@ -15,7 +15,7 @@ const ClientLogin = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push("/client-dashboard"); // Redirect to client's dashboard after successful login
+      router.push("/cboard"); // Redirect to client's dashboard after successful login
     }
   }, [router, isSuccess]);
 

@@ -14,14 +14,6 @@ export enum FoodItemActionEnums {
   createFoodItemPending = "CREATE_FoodItem_PENDING",
   createFoodItemSuccess = "CREATE_FoodItem_SUCCESS",
   createFoodItemError = "CREATE_FoodItem_ERROR",
-
-  updateFoodItemPending = "UPDATE_FoodItem_PENDING",
-  updateFoodItemSuccess = "UPDATE_FoodItem_SUCCESS",
-  updateFoodItemError = "UPDATE_FoodItem_ERROR",
-
-  deleteFoodItemPending = "DELETE_FoodItem_PENDING",
-  deleteFoodItemSuccess = "DELETE_FoodItem_SUCCESS",
-  deleteFoodItemError = "DELETE_FoodItem_ERROR",
 }
 
 export const getallFoodItemsPending = createAction<IFoodItemStateContext>(
@@ -92,42 +84,3 @@ export const createFoodItemError = createAction<IFoodItemStateContext>(
   () => ({ isPending: false, isSuccess: false, isError: true })
 );
 
-export const updateFoodItemPending = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.updateFoodItemPending,
-  () => ({ isPending: true, isSuccess: false, isError: false })
-);
-
-export const updateFoodItemSuccess = createAction<
-  IFoodItemStateContext,
-  IFoodItem
->(FoodItemActionEnums.updateFoodItemSuccess, (FoodItem: IFoodItem) => ({
-  isPending: false,
-  isSuccess: true,
-  isError: false,
-  FoodItem,
-}));
-
-export const updateFoodItemError = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.updateFoodItemError,
-  () => ({ isPending: false, isSuccess: false, isError: true })
-);
-
-export const deleteFoodItemPending = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.deleteFoodItemPending,
-  () => ({ isPending: true, isSuccess: false, isError: false })
-);
-
-export const deleteFoodItemSuccess = createAction<
-  IFoodItemStateContext,
-  IFoodItem
->(FoodItemActionEnums.deleteFoodItemSuccess, (FoodItem: IFoodItem) => ({
-  isPending: false,
-  isSuccess: true,
-  isError: false,
-  FoodItem,
-}));
-
-export const deleteFoodItemError = createAction<IFoodItemStateContext>(
-  FoodItemActionEnums.deleteFoodItemError,
-  () => ({ isPending: false, isSuccess: false, isError: true })
-);
